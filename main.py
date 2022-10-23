@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO, send
+from chatbot_model import chatbot
 
 app = Flask(__name__, template_folder='template')
 app.config['SECRET_KEY'] = 'secret!Tunglete'
@@ -20,7 +21,8 @@ def disconnect():
 @socketIO.on('message')
 def handle_receive_message(message):
     print(f"Receive: {message}")
-    socketIO.send("Server received " + message)
+    chatbot_response = chatbot.chatbot_response(message)
+    socketIO.send(chatbot_response)
 
 
 @app.route('/')
