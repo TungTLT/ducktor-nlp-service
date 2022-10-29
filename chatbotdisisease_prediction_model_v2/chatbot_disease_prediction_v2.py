@@ -8,7 +8,6 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.preprocessing import LabelEncoder
 from sklearn.svm import SVC
 
-
 # Reading the train.csv by removing the
 # last column since it's an empty column
 DATA_PATH = "data/Training.csv"
@@ -23,7 +22,6 @@ X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=24)
-
 
 # Initializing Models
 models = {
@@ -58,14 +56,18 @@ data_dict = {
 # Defining the Function
 # Input: string containing symptoms separated by commmas
 # Output: Generated predictions by models
-def predict_disease(symptoms):
-    symptoms = symptoms.split(",")
+def predict_disease(input_symptom):
+    input_symptom = input_symptom.split(",")
 
     # creating input data for the models
     input_data = [0] * len(data_dict["symptom_index"])
-    for symptom in symptoms:
-        index = data_dict["symptom_index"][symptom.lower()]
-        input_data[index] = 1
+    for symptom in input_symptom:
+        symptom = symptom.lower()
+        if symptom in data_dict['symptom_index']:
+            index = data_dict["symptom_index"][symptom.lower()]
+            input_data[index] = 1
+        else:
+            return "NO DATA"
 
     # reshaping the input data and converting it
     # into suitable format for model predictions
@@ -84,8 +86,9 @@ def predict_disease(symptoms):
         "svm_model_prediction": nb_prediction,
         "final_prediction": final_prediction
     }
-    return predictions
+    print(predictions)
+    return final_prediction
 
 
 # Testing the function
-print(predict_disease("continuous sneezing"))
+print(predict_disease("shivering"))
