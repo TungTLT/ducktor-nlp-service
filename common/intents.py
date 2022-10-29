@@ -1,0 +1,7 @@
+GREETING = 'greeting'
+BOT = 'bot'
+GOODBYE = 'goodbye'
+THANKS = 'thanks'
+NO_ANSWER = 'no_answer'
+OPTIONS = 'options'
+DISEASE_PREDICTION = 'disease_prediction'
