@@ -6,7 +6,7 @@
         },
         {"tag": "bot",
           "patterns": ["Is this a bot?", "Is there a bot chatting to me?", "Is it automated message?", "Computer based reply", "Bot or human?", "Bot is chatting with me?", "Are you system generated message?", "Are you robot?", "Are you machine?", "Are you just computer?", "Are you a robot?", "Are you a person?", "Are you a machine?", "Are you a chatbot?", "Are you a bot?", "Are these automated messages?", "Am I talking to a bot?", "You are a boy are girl?", "You are a bot or human?", "This is a machine?", "This is a chatbot?", "System generated reply", "Is this computer based response", "Is this a machine?", "Are you a human?"],
-          "response": ["I'm Ducktor - an AI chatbot that created by IT's ZOO team, I'm here to give you healthcare advise! Your health is my priority!"],
+          "responses": ["I'm Ducktor - an AI chatbot that created by IT's ZOO team, I'm here to give you healthcare advise! Your health is my priority!"],
           "context": []
         },
         {"tag": "goodbye",

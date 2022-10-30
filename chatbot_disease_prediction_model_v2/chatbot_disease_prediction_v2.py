@@ -9,11 +9,13 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.svm import SVC
 import pickle
 from pathlib import Path
-
+import csv
 
 # Reading the train.csv by removing the
 # last column since it's an empty column
-DATA_PATH = "data/Training.csv"
+project_location = Path(__file__).absolute().parent
+
+DATA_PATH = f"{project_location}/data/Training.csv"
 data = pd.read_csv(DATA_PATH).dropna(axis=1)
 
 # Encoding the target value into numerical
@@ -38,15 +40,13 @@ final_svm_model = SVC()
 final_gnb_model = GaussianNB()
 final_rf_model = RandomForestClassifier(random_state=18)
 
-
-projectLocation = Path(__file__).absolute().parent
 rf_model_file = 'rf_model.pkl'
 gnb_model_file = 'gnb_model.pkl'
 svm_model_file = 'svm_model.pkl'
 
-rf_model_path = Path(f'{projectLocation}/prediction_model/{rf_model_file}')
-gnb_model_path = Path(f'{projectLocation}/prediction_model/{gnb_model_file}')
-svm_model_path = Path(f'{projectLocation}/prediction_model/{svm_model_file}')
+rf_model_path = Path(f'{project_location}/prediction_model/{rf_model_file}')
+gnb_model_path = Path(f'{project_location}/prediction_model/{gnb_model_file}')
+svm_model_path = Path(f'{project_location}/prediction_model/{svm_model_file}')
 
 if rf_model_path.exists():
     final_rf_model = pickle.load(open(rf_model_path, 'rb'))
@@ -90,12 +90,10 @@ def predict_disease(input_symptom):
     # creating input data for the models
     input_data = [0] * len(data_dict["symptom_index"])
     for symptom in input_symptom:
-        symptom = symptom.lower()
+        symptom = symptom.lower().strip()
         if symptom in data_dict['symptom_index']:
             index = data_dict["symptom_index"][symptom]
             input_data[index] = 1
-        else:
-            return "NO DATA"
 
     # reshaping the input data and converting it
     # into suitable format for model predictions
@@ -105,6 +103,10 @@ def predict_disease(input_symptom):
     rf_prediction = data_dict["predictions_classes"][final_rf_model.predict(input_data)[0]]
     nb_prediction = data_dict["predictions_classes"][final_gnb_model.predict(input_data)[0]]
     svm_prediction = data_dict["predictions_classes"][final_svm_model.predict(input_data)[0]]
+
+    # catch case when 3 algorithm return 3 different prediction
+    if rf_prediction != nb_prediction and nb_prediction != svm_prediction and svm_prediction != rf_prediction:
+        return ""
 
     # making final prediction by taking mode of all predictions
     final_prediction = mode([rf_prediction, nb_prediction, svm_prediction])[0][0]
@@ -118,6 +120,52 @@ def predict_disease(input_symptom):
     return final_prediction
 
 
+symptom_description = dict()
+symptom_precaution = dict()
+
+description_file = f'{project_location}/data/symptom_description.csv'
+precaution_file = f'{project_location}/data/symptom_precaution.csv'
+
+
+def read_description_file():
+    with open(description_file) as csv_file:
+        csv_reader = csv.reader(csv_file)
+        for row in csv_reader:
+            _des = {row[0]: row[1]}
+            symptom_description.update(_des)
+
+
+def read_precaution_file():
+    with open(precaution_file) as csv_file:
+        csv_reader = csv.reader(csv_file)
+        for row in csv_reader:
+            _des = {row[0]: [row[1], row[2], row[3], row[4]]}
+            symptom_precaution.update(_des)
+
+
+def get_disease_description(disease):
+    if not symptom_description:
+        read_description_file()
+
+    if disease in symptom_description:
+        return symptom_description[disease]
+    else:
+        return ''
+
+
+def get_disease_precaution(disease):
+    if not symptom_precaution:
+        read_precaution_file()
+
+    if disease in symptom_precaution:
+        return symptom_precaution[disease]
+    else:
+        return []
+
+
 # Testing the function
-user_input = input("Enter disease sympton: ")
-print(predict_disease(user_input))
+# user_input = input("Enter disease sympton: ")
+# disease = predict_disease(user_input)
+# print(disease)
+# print(get_disease_description(disease))
+# print(get_disease_precaution(disease))

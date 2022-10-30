@@ -29,9 +29,51 @@ def handle_disease_prediction():
 
     @socketIO.on(socket_io_event.EVENT_RECEIVE_SYMPTOMS)
     def handle_receive_symptoms(symptoms):
+        #predict disease
         predict_disease = dis_pre_model.predict_disease(symptoms)
-        predict_response = SocketIOResponse(intents.DISEASE_PREDICTION, predict_disease, '')
+        if predict_disease == '':
+            predict_message = 'Sorry, I can\'t figure out your disease!'
+        else:
+            predict_message = f'You\'re maybe contracted to {predict_disease}'
+
+        predict_response = SocketIOResponse(intents.DISEASE_PREDICTION, predict_message, '')
         socketIO.send(predict_response.as_dictionary())
+        socketIO.sleep(1)
+
+        # get information about that disease
+        description = dis_pre_model.get_disease_description(predict_disease)
+        if description != '':
+            description_response = SocketIOResponse(intents.DISEASE_PREDICTION, description, '')
+            socketIO.send(description_response.as_dictionary())
+            socketIO.sleep(1)
+
+        precaution = dis_pre_model.get_disease_precaution(predict_disease)
+        if precaution:
+            precaution_response = SocketIOResponse(intents.DISEASE_PREDICTION,
+                                                   f'You should {precaution[0]}, {precaution[1]}, {precaution[2]} and {precaution[3]}',
+                                                   '')
+            socketIO.send(precaution_response.as_dictionary())
+            socketIO.sleep(1)
+
+        # ask if continue to predict
+        socketIO.send(SocketIOResponse(intents.DISEASE_PREDICTION,
+                                       'Do you want me to continue to predict your disease?',
+                                       socket_io_event.EVENT_ASK_FOR_CONTINUE_PREDICT).as_dictionary())
+
+    @socketIO.on(socket_io_event.EVENT_ASK_FOR_CONTINUE_PREDICT)
+    def ask_for_continue_predict(message):
+        if message == 'yes' or 'yes' in message or message == 'y':
+            response = SocketIOResponse(intents.DISEASE_PREDICTION, 'What is your disease symptoms?',
+                                        socket_io_event.EVENT_RECEIVE_SYMPTOMS)
+            socketIO.send(response.as_dictionary())
+        elif message == 'no' or 'no' in message or message == 'n':
+            response = SocketIOResponse(intents.OPTIONS, 'What can I help you next?',
+                                        socket_io_event.EVENT_MESSAGE)
+            socketIO.send(response.as_dictionary())
+        else:
+            response = SocketIOResponse(intents.DISEASE_PREDICTION, 'Please answer yes or no!',
+                                        socket_io_event.EVENT_ASK_FOR_CONTINUE_PREDICT)
+            socketIO.send(response.as_dictionary())
 
 
 @socketIO.on(socket_io_event.EVENT_MESSAGE)
