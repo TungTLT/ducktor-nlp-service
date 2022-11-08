@@ -8,8 +8,6 @@ sentences = question.read().split('\n')
 final_list = []
 disease_label = 'DISEASE'
 no_name_label = 'O'
-# Input: [Danh sach cac cau], [Danh sach cac benh]
-# Output: [Word label]
 
 for disease in disease_list:
     split_disease = disease.split(' ')

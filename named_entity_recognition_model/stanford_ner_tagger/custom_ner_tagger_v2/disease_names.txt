@@ -13,8 +13,6 @@ Acute cholecystitis
 Acute kidney injury
 Acute respiratory distress syndrome
 Adenoidectomy
-Agranulocytosis and neutropenia
-white blood cell deficiencies
 Air or gas embolism
 Alcohol poisoning
 Alexander technique
@@ -55,10 +53,8 @@ Blood in urine
 Blood pressure test
 Body dysmorphic disorder
 BDD
-Body odour
 Infected piercings
 Boils
-Bornholm disease
 Botulism
 Bowel polyps
 Bowen's disease
@@ -73,7 +69,6 @@ Broken finger or thumb
 Broken leg
 Broken nose
 Broken or bruised ribs
-Broken or knocked-out tooth
 Broken toe
 Bronchitis
 Brucellosis
@@ -101,7 +96,6 @@ Circumcision in boys
 Circumcision in men
 Claustrophobia
 Cluster headaches
-Coated or white tongue
 Colour vision deficiency
 Colour blindness
 Coma
@@ -126,15 +120,14 @@ Decongestants
 Dental abscess
 Dentures
 false teeth
-Dermatillomania
 Dyspraxia in adults
 Developmental co-ordination disorder
 Developmental dysplasia of the hip
 Diabetes
 Diabetic eye screening
 Diabetic ketoacidosis
-Diarrhoea and vomiting
-Gastroenteritis
+
+
 DiGeorge syndrome
 Dislocated kneecap
 Dislocated shoulder
@@ -152,7 +145,6 @@ Earwax build-up
 Eating disorders
 Ebola virus disease
 Echocardiogram
-E. coli infection
 Ectropion
 Edwards' syndrome
 Ehlers-Danlos syndromes
@@ -210,7 +202,6 @@ Hairy cell leukaemia
 Hallucinations and hearing voices
 Hamstring injury
 Hand, foot and mouth disease
-Hand pain -OLD
 Headaches
 Head and neck cancer
 Health anxiety
@@ -220,8 +211,6 @@ Heart palpitations
 Heat exhaustion and heatstroke
 Heat rash
 prickly heat
-Henoch-Schönlein purpura
-HSP
 Hepatitis
 Herbal medicines
 Herceptin
@@ -247,11 +236,9 @@ Hoarding disorder
 Homeopathy
 Home oxygen therapy
 Homocystinuria
-Hookworm infection
 Noise sensitivity
 hyperacusis
 Hypnotherapy
-Hypoparathyroidism and hyperparathyroidism
 Hypothermia
 Ichthyosis
 Indigestion
@@ -299,14 +286,10 @@ Maple syrup urine disease
 Mastoiditis
 MCADD
 Medically unexplained symptoms
-Memory loss
 amnesia
-Ménière's disease
 Mesothelioma
 Metabolic syndrome
 Metallic taste
-Pain in the ball of the foot
-metatarsalgia
 Mitral valve problems
 Molar pregnancy
 Morton's neuroma
@@ -323,7 +306,6 @@ Nail patella syndrome
 Nail problems
 Nasal and sinus cancer
 Nasopharyngeal cancer
-Nausea and vomiting in adults
 Neck pain
 Necrotising fasciitis
 Neonatal herpes
@@ -341,18 +323,15 @@ Norovirus
 vomiting bug
 NSAIDs
 Swollen ankles, feet and legs
-oedema
 Oesophageal atresia and tracheo-oesophageal fistula
 Oral thrush
 mouth thrush
-Oral thrush in babies
 Orf
 Osteophyte
 bone spur
 Otosclerosis
 Ovulation pain
 Panic disorder
-Paracetamol
 Patau's syndrome
 Peak flow test
 Pelvic pain
@@ -360,11 +339,8 @@ Penile cancer
 Period pain
 Periods
 Persistent trophoblastic disease and choriocarcinoma
-Personality disorder
 PET scan
 Phaeochromocytoma
-Smelling things that aren't there
-phantosmia
 Phenylketonuria
 Tight foreskin
 phimosis
@@ -404,8 +380,6 @@ Pudendal neuralgia
 Pyoderma gangrenosum
 Q fever
 Quinsy
-Radiation
-Skin rashes in babies
 Rashes in babies and children
 Red blood cell count
 Red eye
@@ -419,7 +393,6 @@ Rett syndrome
 Reye's syndrome
 Roseola
 Salivary gland stones
-Salmonella infection
 Sarcoidosis
 SARS
 severe acute respiratory syndrome
@@ -429,7 +402,6 @@ bilharzia
 Scleroderma
 Selective mutism
 Septic arthritis
-Septic shock
 Sexually transmitted infections
 STIs
 Shin splints
@@ -437,7 +409,6 @@ Shortness of breath
 Shoulder impingement
 Sick building syndrome
 Silicosis
-Sinus headache
 Skin cyst
 Skin tags
 Slapped cheek syndrome
@@ -447,8 +418,6 @@ Snake bites
 Social anxiety
 social phobia
 Soft tissue sarcomas
-Encopresis
-soiling of clothes in children
 Sore or dry lips
 Sore or white tongue
 Sore throat
@@ -465,7 +434,6 @@ Stevens-Johnson syndrome
 Stomach ache
 Stopped or missed periods
 Stop smoking treatments
-Streptococcal infections
 Stretch marks
 Stye
 Sudden infant death syndrome
@@ -474,7 +442,6 @@ Sunburn
 Swine flu
 H1N1
 Swollen glands
-Tapeworms
 Temporomandibular disorder
 TMD
 Tension headaches
@@ -503,14 +470,11 @@ Vaginal discharge
 Vaginal dryness
 Vaginitis
 Vasculitis
-Vestibular neuronitis
 Blindness and vision loss
 Vomiting blood
-Vomiting in children and babies
 Von Willebrand disease
 Vulvodynia
 vulval pain
-Warfarin
 Warts and verrucas
 West Nile virus
 Whooping cough
@@ -571,7 +535,6 @@ Bad breath
 Baker's cyst
 Bartholin's cyst
 Bedwetting in children
-Behçet's disease
 Bell's palsy
 Benign brain tumour
 non-cancerous
@@ -601,7 +564,6 @@ Brain death
 Breast abscess
 Breast cancer in women
 Breast cancer in men
-Breast cancer screening
 Breast lumps
 Bronchiectasis
 Bronchiolitis
@@ -609,7 +571,6 @@ Bronchodilators
 Bulging eyes
 exophthalmos
 Bulimia
-Bunion
 Burns and scalds
 Bursitis
 Caesarean section
@@ -621,7 +582,6 @@ Cataract surgery
 Cavernous sinus thrombosis
 Cellulitis
 Cerebral palsy
-Cerebrovascular disease
 Cervical cancer
 Cervical screening
 Cervical spondylosis
@@ -647,8 +607,6 @@ Club foot
 Coeliac disease
 Cognitive behavioural therapy
 CBT
-Cold sore
-herpes simplex virus
 Colic
 Colostomy
 Colposcopy
@@ -735,12 +693,9 @@ Gastrectomy
 Gastroscopy
 Gender dysphoria
 Generalised anxiety disorder in adults
-Genetics
 Genital herpes
 Genital warts
 Gestational diabetes
-Giant cell arteritis
-temporal arteritis
 Giardiasis
 Glandular fever
 Glaucoma
@@ -749,7 +704,6 @@ Glue ear
 Goitre
 Gonorrhoea
 Gout
-Guillain-Barré syndrome
 Gum disease
 Haemochromatosis
 Haemophilia
@@ -788,7 +742,6 @@ HRT
 Huntington's disease
 Hydrocephalus
 Hydronephrosis
-Hypotonia
 Hysterectomy
 Hysteroscopy
 Idiopathic pulmonary fibrosis
@@ -863,12 +816,9 @@ Skin cancer
 melanoma
 Meningitis
 Menopause
-Middle ear infection
-otitis media
 Migraine
 Head injury and concussion
 Miscarriage
-Mobile phone safety
 Moles
 Molluscum contagiosum
 Motor neurone disease
@@ -878,7 +828,6 @@ Mucositis
 Multiple myeloma
 Multiple sclerosis
 Mumps
-Munchausen's syndrome
 Muscular dystrophy
 Myasthenia gravis
 Narcolepsy
@@ -889,7 +838,6 @@ Neurofibromatosis type 2
 Non-allergic rhinitis
 Non-gonococcal urethritis
 Non-Hodgkin lymphoma
-Skin cancer
 non-melanoma
 Noonan syndrome
 Nosebleed
@@ -904,7 +852,6 @@ Osteoarthritis
 Osteomyelitis
 Osteopathy
 Osteoporosis
-Otitis externa
 Ovarian cancer
 Ovarian cyst
 Overactive thyroid
@@ -931,7 +878,6 @@ Piles
 haemorrhoids
 Pilonidal sinus
 Plastic surgery
-Pneumococcal infections
 Pneumonia
 Poisoning
 Polycystic ovary syndrome
@@ -957,7 +903,6 @@ Prostate cancer
 Benign prostate enlargement
 Psoriasis
 Psychosis
-Psychotherapy
 Pulmonary embolism
 Pulmonary hypertension
 Rabies
@@ -998,7 +943,6 @@ myopia
 Shoulder pain
 Sickle cell disease
 Sinusitis
-Sjögren's syndrome
 Sleep paralysis
 Slipped disc
 Small bowel transplant
@@ -1036,7 +980,6 @@ Testicle lumps and swellings
 Testicular cancer
 Thalassaemia
 Threadworms
-Thrush in men
 Thyroid cancer
 Tick-borne encephalitis
 TBE
@@ -1061,7 +1004,6 @@ Tuberculosis
 TB
 Tuberous sclerosis
 Turner syndrome
-Old - Type 1 diabetes
 Type 2 diabetes
 Typhoid fever
 Ulcerative colitis
@@ -1071,10 +1013,8 @@ hypothyroidism
 Undescended testicles
 Urinary catheter
 Urinary incontinence
-Urinary tract infections in children
 Uveitis
 Vaginal cancer
-Vaginal thrush
 Vaginismus
 Varicose eczema
 Varicose veins
@@ -1096,9 +1036,7 @@ Bird flu
 Antifungal medicines
 Blood transfusion
 Ringworm
-Component test
 Early menopause
-Floaters and flashes in the eyes
 Worms in humans
 Tremor or shaking hands
 Low white blood cell count
@@ -1106,15 +1044,6 @@ Bunions
 Lost or changed sense of smell
 Soiling
 child pooing their pants
-Oral thrush
-mouth thrush
-Sickness and diarrhoea
-Temporal arteritis
-Memory loss
-Amnesia
-Headaches
-Sinusitis
-Sinus infection
 Thrush in men and women
 Cold sores
 Group B strep
@@ -1122,49 +1051,26 @@ Skin picking disorder
 Hyperparathyroidism
 Hypoparathyroidism
 Ear infections
-Biological and biosimilar medicines
-Biosimilars
 Twitching eyes and muscles
 Learning disabilities
 NHS screening
 Hormone headaches
-Headaches
 Complementary and alternative medicine
 Knocked-out tooth
 Chipped, broken or cracked tooth
-Diarrhoea and vomiting
 Bullous pemphigoid
-Feeling sick
 Nausea
-Bullet
-Middle East respiratory syndrome
-MERS
 Toe pain
 Monkeypox
-Vagina problems
-Penis problems
-Diabetic eye screening 2
-Medical cannabis
-Cannabis oils
-High cholesterol 2
-Diabetic eye screening 1
-High cholesterol 1
-Body odour
 BO
-Human papillomavirus
-HPV
 Plantar fasciitis
-Autism
 Wrist pain
-Swollen arms and hands
-Oedema
 Colonoscopy
 Genetic and genomic testing
 Sleep apnoea
-Coronavirus 
+Coronavirus
 COVID-19
 High temperature
-Fever
 Testicle pain
 Hearing aids and implants
 Breast screening
@@ -1172,57 +1078,263 @@ Mammogram
 Smelly feet
 Bloating
 Tiredness and fatigue
-Foot pain
 Ankle pain
-Heel pain
-Toe pain
 Pain in the top of the foot
 Pain in the bottom of the foot
-Pain in the ball of the foot
 Teeth whitening
 Laser eye surgery and lens surgery
 Braces and orthodontics
 Keloid scars
 Hand pain
-Wrist pain
 Finger pain
 Thumb pain
 Pain in the palm of the hand
 Pain in the back of the hand
 Type 1 diabetes
-Psychosis
-Claustrophobia
-Postpartum psychosis
 Personality disorders
-Selective mutism
-Hoarding disorder
 Psychotic depression
-Trichotillomania
-Hair pulling disorder
-Anorexia nervosa
-Generalised anxiety disorder in adults
-Body dysmorphic disorder
-BDD
-Bipolar disorder
-Bulimia
-Binge eating disorder
-Schizophrenia
-Dissociative disorders
-Borderline personality disorder
-Antisocial personality disorder
-Seasonal affective disorder
-Agoraphobia
-Skin picking disorder
-Clinical depression
-Phobias
-Postnatal depression
 Munchausen syndrome
-Obsessive compulsive disorder
-OCD
-Health anxiety
-Social anxiety
-Social phobia
-Panic disorder
-Fabricated or induced illness
-Post-traumatic stress disorder
-PTSD
+Acid reflux in babies
+Amblyopia
+Anaemia iron deficiency
+Anaemia vitamin B12 or folate deficiency
+Aneurysm abdominal aortic
+Aneurysm brain
+Angioplasty
+Anus itchy
+Asperger's
+Avian flu
+Baby
+Basal cell carcinoma
+Behçet's disease
+Being sick
+Bilharzia
+Bite animal or human
+Bleeding after the menopause
+Blood poisoning
+Blood pressure high
+Blood pressure low
+Bowel transplant
+Brachycephaly and plagiocephaly
+Brain haemorrhage
+Brain tumour benign
+Brain tumour malignant
+Breast screening mammogram
+Bruxism
+Buttock pain
+CABG
+Cannabis oil medical cannabis
+Cat bites
+Cataracts age-related
+Cataracts children
+Cholangiocarcinoma
+Cholecystitis acute
+Cholesterol high
+Chronic fatigue syndrome ME/CFS
+CJD
+Coccyx pain
+Colon cancer
+Confusion sudden
+Congenital hip dislocation
+Coronavirus COVID-19
+Corticosteroid cream
+Corticosteroids
+Cyanosis
+Deafness
+Decompression sickness
+Delirium
+Dementia frontotemporal
+Dementia vascular
+Dental pain
+DEXA scan
+Diabetes type 1
+Diabetes type 2
+Diabetes in pregnancy
+Do not attempt cardiopulmonary resuscitation decisions
+DNACPR
+Dog bites
+Dry lips
+DVT
+Dwarfism
+Dyspraxia in children
+Eardrum burst
+Ectopic beats
+Eczema atopic
+Eczema contact dermatitis
+Eczema discoid
+Eczema varicose
+Endometrial cancer
+Essential tremor
+Eye flashes
+Eye floaters
+Eye infection herpes
+Face blindness
+Feeling sick nausea
+Fever in adults
+Fever in children
+Fits children with fever
+Fits seizures
+Flat head syndrome
+Flatulence
+Foreskin problems
+Functional neurological disorder
+Gallbladder pain
+Gastro-oesophageal reflux disease GORD
+Gastroenteritis
+Genetic test for cancer gene
+German measles
+Giant cell arteritis
+Gigantism
+Guillain-Barré syndrome
+Haemorrhoids
+Halitosis
+Headaches hormone
+Headaches tension-type
+Hearing voices
+Heart bypass
+Heart disease coronary
+Heart pain
+Heart rhythm problems
+Heart valve problems
+Heart valve replacement
+Henoch-Schönlein purpura HSP
+Hernia femoral
+Hernia hiatus
+Hernia inguinal
+Hernia umbilical
+Herpes genital
+Herpes in babies
+High temperature in adults
+Hip dysplasia
+Hirsutism
+Hookworm
+HRT
+Hughes syndrome
+Human bites
+Human papillomavirus HPV
+Hyperhidrosis
+Hypersomnia
+Hypertension
+Hyperthyroidism
+Hypoglycaemia low blood sugar
+Hypotension
+Hypothyroidism
+IBS
+Impotence
+Incontinence urinary
+Influenza
+Intersex
+Interstitial cystitis
+Irritable hip
+Jaundice in newborns
+Jaw pain
+Kidney failure
+Leg ulcer
+Leukaemia acute lymphoblastic
+Leukaemia acute myeloid
+Leukaemia chronic lymphocytic
+Leukaemia chronic myeloid
+Leukaemia hairy cell
+Lips sore or dry
+Liver disease alcohol-related
+Lower back pain
+Lumbago
+Macular degeneration age-related
+Male menopause
+Medical cannabis and cannabis oils
+Menopause early
+Menstrual pain
+Metatarsalgia
+Middle East respiratory syndrome MERS
+Mouth thrush
+Myeloma
+Myopia
+Ménière's disease
+Nail fungal infection
+Nose cancer
+Osteomalacia
+Oxygen therapy
+Pain in testicles
+Painful bladder syndrome
+Palpitations
+Pancreatitis acute
+Pancreatitis chronic
+Perimenopause
+Periods heavy
+Periods irregular
+Periods stopped or missed
+Phimosis
+Polycystic kidney disease autosomal dominant
+Polycystic kidney disease autosomal recessive
+Popliteal cyst
+Premature ejaculation
+Prickly heat
+Proctalgia
+Prolapse pelvic organ
+Prostate enlargement
+Puberty early or delayed
+Pulmonary fibrosis
+Rectal bleeding
+Rectal cancer
+Retinal detachment
+Rhinitis allergic
+Seizures children with fever
+Seizures fits
+Sense of smell lost/changed
+Septicaemia
+Shaking
+Shin pain shin splints
+Sinus cancer
+Sinusitis sinus infection
+Sjögren's syndrome
+Smear test
+Smoking treatments to stop
+Solar keratoses
+Sore lips
+Sperm count low
+Squamous cell carcinoma
+Stent insertion
+Steroid cream
+Steroid misuse
+Sting or bite insect
+Stomach bug
+Stuttering
+Suicidal thoughts
+Superficial thrombophlebitis
+Surgery having an operation
+Swallowing pills
+Swallowing problems
+Sweat rash
+Sweating excessive
+Sweating excessive
+Sweating at night
+Swollen arms and hands oedema
+Tapeworm
+Thirst excessive
+Thoracic outlet syndrome
+Throat sore
+TIA
+Tongue sore or white
+Tongue cancer
+Tooth chipped or broken
+Tooth knocked out
+Tremor
+Tummy ache
+Tummy bug
+Upper back pain
+Urethritis NGU
+Urine smelly
+Uterine womb) cance
+Vaginal pain
+Vegetative state
+Vestibular neuritis
+Vestibular schwannoma
+Vomiting bug
+Vomiting
+Weight loss unexpected
+Weight loss unintentional
+Weil's disease
+White blood cell count low
+Whitlow finger
+Wind
+Winter vomiting bug
