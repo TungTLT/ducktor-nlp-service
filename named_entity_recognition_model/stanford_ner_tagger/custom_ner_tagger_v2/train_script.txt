@@ -1,0 +1,1 @@
+java -cp ".\stanford-ner.jar" -mx4g edu.stanford.nlp.ie.crf.CRFClassifier -prop .\custom_ner_tagger_v2\prop.txt

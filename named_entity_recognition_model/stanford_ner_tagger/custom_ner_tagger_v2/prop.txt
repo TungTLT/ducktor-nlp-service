@@ -1,5 +1,5 @@
-trainFile = custom_ner_tagger/disease_train_data.tsv
-serializeTo = disease_recognize.ser.gz
+trainFile = custom_ner_tagger_v2/train_data.tsv
+serializeTo = disease_tagger.ser.gz
 map = word=0,answer=1
 
 useClassFeature=true

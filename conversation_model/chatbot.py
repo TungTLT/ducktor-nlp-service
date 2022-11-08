@@ -1,14 +1,15 @@
-import nltk
-from nltk.stem import WordNetLemmatizer
 import json
-import random
 import pickle
-import numpy as np
-from keras.models import load_model
+import random
 from pathlib import Path
 
+import nltk
+import numpy as np
+from keras.models import load_model
+from nltk.stem import WordNetLemmatizer
+
 folder_location = Path(__file__).absolute().parent
-model = load_model(f'{folder_location}/chatbot_conversation_model.h5')
+model = load_model(f'{folder_location}/conversation_model.h5')
 intents = json.loads(open(f'{folder_location}/intents.json').read())
 words = pickle.load(open(f'{folder_location}/words.pkl', 'rb'))
 classes = pickle.load(open(f'{folder_location}/classes.pkl', 'rb'))
@@ -75,7 +76,6 @@ def response(msg):
 
 # ============================= GUI =========================================
 # Creating GUI with tkinter
-# import tkinter
 # from tkinter import *
 #
 #
@@ -89,7 +89,7 @@ def response(msg):
 #         ChatLog.config(foreground="#442265", font=("Verdana", 12))
 #
 #         res = response(msg)
-#         ChatLog.insert(END, "Bot: " + res + '\n\n')
+#         ChatLog.insert(END, "Bot: " + res['content'] + '\n\n')
 #
 #         ChatLog.config(state=DISABLED)
 #         ChatLog.yview(END)
