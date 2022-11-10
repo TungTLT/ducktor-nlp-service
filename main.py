@@ -1,11 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_socketio import SocketIO, send
 from conversation_model import chatbot as con_model
 from disease_prediction_model_v2 import chatbot_disease_prediction_v2 as disease_prediction_model
 from common import intents, socket_io_event
 from socket_io_response import SocketIOResponse
 from named_entity_recognition_model import nltk_ner as disease_info_model
-
+from get_disease_information.disease_information_client import GetDiseaseInformationClient
 
 app = Flask(__name__, template_folder='template')
 app.config['SECRET_KEY'] = 'secret!Tunglete'
@@ -16,6 +16,9 @@ socketIO = SocketIO(app, cors_allowed_origins='*', async_mode='eventlet')
 @socketIO.on(socket_io_event.EVENT_CONNECT)
 def connect():
     print("A user connected!")
+    socketIO.send(SocketIOResponse(intents.GREETING,
+                                   'Yo, It\'s Ducktor here, what can I help you?',
+                                   '').as_dictionary())
 
 
 @socketIO.on(socket_io_event.EVENT_DISCONNECT)
@@ -23,7 +26,7 @@ def disconnect():
     print("A user disconnected!")
 
 
-# @socketIO.on(socket_io_event.EVENT_DISEASE_PREDICTION)
+@socketIO.on(socket_io_event.EVENT_DISEASE_PREDICTION)
 def handle_disease_prediction():
     response = SocketIOResponse(intents.DISEASE_PREDICTION, 'What is your disease symptoms?',
                                 socket_io_event.EVENT_RECEIVE_SYMPTOMS)
@@ -78,10 +81,93 @@ def handle_disease_prediction():
             socketIO.send(response.as_dictionary())
 
 
+@socketIO.on(socket_io_event.EVENT_DISEASE_INFORMATION)
 def handle_disease_information(user_input):
+    def handle_send_disease_info_message(disease_info):
+        name_message = f'{disease_info.name.upper()}'
+        socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
+                                       name_message,
+                                       '').as_dictionary())
+        socketIO.sleep(1)
+
+        if disease_info.overview != '':
+            overview_message = 'Overview: ' + disease_info.overview
+            socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
+                                           overview_message,
+                                           '').as_dictionary())
+            socketIO.sleep(1)
+
+        if disease_info.diagnosis != '':
+            diagnosis_message = 'Diagnosis: ' + disease_info.diagnosis
+            socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
+                                           diagnosis_message,
+                                           '').as_dictionary())
+            socketIO.sleep(1)
+
+        if disease_info.prevention != '':
+            prevention_message = 'Prevention: ' + disease_info.prevention
+            socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
+                                           prevention_message,
+                                           '').as_dictionary())
+            socketIO.sleep(1)
+
+        if disease_info.treatment != '':
+            treatment_message = 'Treatment: ' + disease_info.treatment
+            socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
+                                           treatment_message,
+                                           '').as_dictionary())
+            socketIO.sleep(1)
+
+        socketIO.send(SocketIOResponse(intents.OPTIONS,
+                                       'That is all I know. What can I help you next?',
+                                       socket_io_event.EVENT_MESSAGE).as_dictionary())
+
     searching_disease = disease_info_model.get_disease_tagger_words(user_input)
-    # Calling API
-    print(searching_disease)
+    socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION, 'Give me a second!', '').as_dictionary())
+    client = GetDiseaseInformationClient()
+    response_list = client.search_for_disease_information(searching_disease)
+    response_len = len(response_list)
+    max_selection = 5 if response_len > 5 else response_len
+
+    if response_len > 1:
+        for index, disease in enumerate(response_list):
+            if index < max_selection:
+                socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
+                                               f'{index + 1}: {disease.name}', '').as_dictionary())
+                socketIO.sleep(1)
+            else:
+                break
+
+        socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
+                                       f'Which disease do you want to know? (type 1 - {max_selection})',
+                                       socket_io_event.EVENT_ASK_FOR_DISEASE_SELECTION).as_dictionary())
+    elif response_len == 1:
+        socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
+                                       f'I found these information about {response_list[0].name}',
+                                       '').as_dictionary())
+        socketIO.sleep(1)
+
+        disease_info = client.get_disease_information(response_list[0].url)
+        handle_send_disease_info_message(disease_info)
+
+    else:
+        socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
+                                       'Sorry! I found nothing about that disease!',
+                                       socket_io_event.EVENT_MESSAGE).as_dictionary())
+
+    @socketIO.on(socket_io_event.EVENT_ASK_FOR_DISEASE_SELECTION)
+    def ask_for_selection(user_selection: str):
+        try:
+            user_number_selection = int(user_selection)
+            if 1 <= user_number_selection <= max_selection:
+                disease_info = client.get_disease_information(response_list[user_number_selection - 1].url)
+                handle_send_disease_info_message(disease_info)
+            else:
+                raise ValueError
+        except ValueError:
+            socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
+                                           f'Please type 1 - {max_selection}',
+                                           socket_io_event.EVENT_ASK_FOR_DISEASE_SELECTION).as_dictionary())
 
 
 @socketIO.on(socket_io_event.EVENT_MESSAGE)
