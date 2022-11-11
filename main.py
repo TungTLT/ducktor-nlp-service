@@ -6,6 +6,7 @@ from common import intents, socket_io_event
 from socket_io_response import SocketIOResponse
 from named_entity_recognition_model import nltk_ner as disease_info_model
 from get_disease_information.disease_information_client import GetDiseaseInformationClient
+from get_covid_information.covid_information_api import CovidAPI
 
 app = Flask(__name__, template_folder='template')
 app.config['SECRET_KEY'] = 'secret!Tunglete'
@@ -189,7 +190,7 @@ def home():
     return render_template('index.html')
 
 
-host = '192.168.1.85'
+host = '192.168.90.110'
 port = 5004
 
 if __name__ == '__main__':

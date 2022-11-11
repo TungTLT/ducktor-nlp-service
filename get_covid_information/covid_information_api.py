@@ -264,24 +264,3 @@ class CovidAPI:
             except requests.exceptions.JSONDecodeError:
                 print('Json Decode Error')
                 return 0
-
-
-client = CovidAPI()
-print(f'infected in day (global): {client.get_infected_in_day_global()}')
-print(f'infected in day (vietnam): {client.get_infected_in_day_vietnam()}')
-print(f'infected total (global): {client.get_total_infected_global()}')
-print(f'infected total (vietnam): {client.get_total_infected_vietnam()}')
-
-print('==================================================================')
-
-print(f'death in day (global): {client.get_death_in_day_global()}')
-print(f'death in day (vietnam): {client.get_death_in_day_vietnam()}')
-print(f'death total (global): {client.get_total_death_global()}')
-print(f'death total (vietnam): {client.get_total_death_vietnam()}')
-
-print('==================================================================')
-
-print(f'recover in day (global): {client.get_recover_in_day_global()}')
-print(f'recover in day (vietnam): {client.get_recover_in_day_vietnam()}')
-print(f'recover total (global): {client.get_total_recover_global()}')
-print(f'recover total (vietnam): {client.get_total_recover_vietnam()}')
