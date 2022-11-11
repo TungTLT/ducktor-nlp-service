@@ -51,3 +51,10 @@ class DiseaseInformation:
             'diagnosis': self.diagnosis,
             'prevention': self.prevention
         }
+
+    def is_not_valid(self) -> bool:
+        return self.overview == '' \
+               and self.symptoms == '' \
+               and self.treatment == '' \
+               and self.diagnosis == '' \
+               and self.prevention == ''

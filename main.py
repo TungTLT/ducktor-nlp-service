@@ -85,6 +85,12 @@ def handle_disease_prediction():
 @socketIO.on(socket_io_event.EVENT_DISEASE_INFORMATION)
 def handle_disease_information(user_input):
     def handle_send_disease_info_message(disease_info):
+        if disease_info.is_not_valid():
+            socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
+                                           'Sorry! I found nothing about that disease!',
+                                           socket_io_event.EVENT_MESSAGE).as_dictionary())
+            return
+
         name_message = f'{disease_info.name.upper()}'
         socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
                                        name_message,
