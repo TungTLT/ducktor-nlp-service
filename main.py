@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from flask_socketio import SocketIO, send
 from conversation_model import chatbot as con_model
-from disease_prediction_model_v2 import chatbot_disease_prediction_v2 as disease_prediction_model
+from disease_prediction_model import chatbot_disease_prediction_v2 as disease_prediction_model
 from common import intents, socket_io_event
 from socket_io_response import SocketIOResponse
 from named_entity_recognition_model import nltk_ner as disease_info_model
