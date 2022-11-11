@@ -18,7 +18,7 @@ class CovidAPI:
     _total_recover_vietnam = None
 
     # GLOBAL
-    def get_infected_in_day_global(self) -> int:
+    def get_infected_in_day_global(self):
         if self._infected_in_day_global is None:
             try:
                 response = requests.get(url=self.base_url).json()
@@ -28,14 +28,14 @@ class CovidAPI:
                     raise ValueError
             except ValueError:
                 print('Value Error')
-                return 0
+                return None
             except requests.exceptions.JSONDecodeError:
                 print('Json Decode Error')
-                return 0
+                return None
 
-        return self._infected_in_day_global
+        return {'result': self._infected_in_day_global}
 
-    def get_total_infected_global(self) -> int:
+    def get_total_infected_global(self):
         if self._total_infected_global is None:
             try:
                 response = requests.get(url=self.base_url).json()
@@ -45,14 +45,14 @@ class CovidAPI:
                     raise ValueError
             except ValueError:
                 print('Value Error')
-                return 0
+                return None
             except requests.exceptions.JSONDecodeError:
                 print('Json Decode Error')
-                return 0
+                return None
 
-        return self._total_infected_global
+        return {'result': self._total_infected_global}
 
-    def get_death_in_day_global(self) -> int:
+    def get_death_in_day_global(self):
         if self._death_in_day_global is None:
             try:
                 response = requests.get(url=self.base_url).json()
@@ -62,14 +62,14 @@ class CovidAPI:
                     raise ValueError
             except ValueError:
                 print('Value Error')
-                return 0
+                return None
             except requests.exceptions.JSONDecodeError:
                 print('Json Decode Error')
-                return 0
+                return None
 
-        return self._death_in_day_global
+        return {'result': self._death_in_day_global}
 
-    def get_total_death_global(self) -> int:
+    def get_total_death_global(self):
         if self._total_death_global is None:
             try:
                 response = requests.get(url=self.base_url).json()
@@ -79,14 +79,14 @@ class CovidAPI:
                     raise ValueError
             except ValueError:
                 print('Value Error')
-                return 0
+                return None
             except requests.exceptions.JSONDecodeError:
                 print('Json Decode Error')
-                return 0
+                return None
 
-        return self._total_death_global
+        return {'result': self._total_death_global}
 
-    def get_recover_in_day_global(self) -> int:
+    def get_recover_in_day_global(self):
         if self._recover_in_day_global is None:
             try:
                 response = requests.get(url=self.base_url).json()
@@ -96,14 +96,14 @@ class CovidAPI:
                     raise ValueError
             except ValueError:
                 print('Value Error')
-                return 0
+                return None
             except requests.exceptions.JSONDecodeError:
                 print('Json Decode Error')
-                return 0
+                return None
 
-        return self._recover_in_day_global
+        return {'result': self._recover_in_day_global}
 
-    def get_total_recover_global(self) -> int:
+    def get_total_recover_global(self):
         if self._total_recover_global is None:
             try:
                 response = requests.get(url=self.base_url).json()
@@ -113,12 +113,12 @@ class CovidAPI:
                     raise ValueError
             except ValueError:
                 print('Value Error')
-                return 0
+                return None
             except requests.exceptions.JSONDecodeError:
                 print('Json Decode Error')
-                return 0
+                return None
 
-        return self._total_recover_global
+        return {'result': self._total_recover_global}
 
     # VIETNAM
     def get_infected_in_day_vietnam(self):
@@ -132,7 +132,6 @@ class CovidAPI:
                                 and 'NewConfirmed' in country:
                             if country['CountryCode'] == 'VN':
                                 self._infected_in_day_vietnam = country['NewConfirmed']
-                                return self._infected_in_day_vietnam
                         else:
                             raise ValueError
                     raise ValueError
@@ -140,10 +139,12 @@ class CovidAPI:
                     raise ValueError
             except ValueError:
                 print('Value Error')
-                return 0
+                return None
             except requests.exceptions.JSONDecodeError:
                 print('Json Decode Error')
-                return 0
+                return None
+
+        return {'result': self._infected_in_day_vietnam}
 
     def get_total_infected_vietnam(self):
         if self._total_infected_vietnam is None:
@@ -156,7 +157,6 @@ class CovidAPI:
                                 and 'TotalConfirmed' in country:
                             if country['CountryCode'] == 'VN':
                                 self._total_infected_vietnam = country['TotalConfirmed']
-                                return self._total_infected_vietnam
                         else:
                             raise ValueError
                     raise ValueError
@@ -164,10 +164,12 @@ class CovidAPI:
                     raise ValueError
             except ValueError:
                 print('Value Error')
-                return 0
+                return None
             except requests.exceptions.JSONDecodeError:
                 print('Json Decode Error')
-                return 0
+                return None
+
+        return {'result': self._total_infected_vietnam}
 
     def get_death_in_day_vietnam(self):
         if self._death_in_day_vietnam is None:
@@ -180,7 +182,6 @@ class CovidAPI:
                                 and 'NewDeaths' in country:
                             if country['CountryCode'] == 'VN':
                                 self._death_in_day_vietnam = country['NewDeaths']
-                                return self._death_in_day_vietnam
                         else:
                             raise ValueError
                     raise ValueError
@@ -188,10 +189,12 @@ class CovidAPI:
                     raise ValueError
             except ValueError:
                 print('Value Error')
-                return 0
+                return None
             except requests.exceptions.JSONDecodeError:
                 print('Json Decode Error')
-                return 0
+                return None
+
+        return {'result': self._death_in_day_vietnam}
 
     def get_total_death_vietnam(self):
         if self._total_death_vietnam is None:
@@ -204,7 +207,6 @@ class CovidAPI:
                                 and 'TotalDeaths' in country:
                             if country['CountryCode'] == 'VN':
                                 self._total_death_vietnam = country['TotalDeaths']
-                                return self._total_death_vietnam
                         else:
                             raise ValueError
                     raise ValueError
@@ -212,10 +214,12 @@ class CovidAPI:
                     raise ValueError
             except ValueError:
                 print('Value Error')
-                return 0
+                return None
             except requests.exceptions.JSONDecodeError:
                 print('Json Decode Error')
-                return 0
+                return None
+
+        return {'result': self._total_death_vietnam}
 
     def get_recover_in_day_vietnam(self):
         if self._recover_in_day_vietnam is None:
@@ -228,7 +232,6 @@ class CovidAPI:
                                 and 'NewRecovered' in country:
                             if country['CountryCode'] == 'VN':
                                 self._recover_in_day_vietnam = country['NewRecovered']
-                                return self._recover_in_day_vietnam
                         else:
                             raise ValueError
                     raise ValueError
@@ -236,10 +239,12 @@ class CovidAPI:
                     raise ValueError
             except ValueError:
                 print('Value Error')
-                return 0
+                return None
             except requests.exceptions.JSONDecodeError:
                 print('Json Decode Error')
-                return 0
+                return None
+
+        return {'result': self._recover_in_day_vietnam}
 
     def get_total_recover_vietnam(self):
         if self._total_recover_vietnam is None:
@@ -252,7 +257,6 @@ class CovidAPI:
                                 and 'TotalRecovered' in country:
                             if country['CountryCode'] == 'VN':
                                 self._total_recover_vietnam = country['TotalRecovered']
-                                return self._total_recover_vietnam
                         else:
                             raise ValueError
                     raise ValueError
@@ -260,7 +264,9 @@ class CovidAPI:
                     raise ValueError
             except ValueError:
                 print('Value Error')
-                return 0
+                return None
             except requests.exceptions.JSONDecodeError:
                 print('Json Decode Error')
-                return 0
+                return None
+
+        return {'result': self._total_recover_vietnam}

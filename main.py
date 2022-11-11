@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request
-from flask_socketio import SocketIO, send
+from flask import Flask, render_template, jsonify
+from flask_socketio import SocketIO
 from conversation_model import chatbot as con_model
 from disease_prediction_model import chatbot_disease_prediction_v2 as disease_prediction_model
 from common import intents, socket_io_event
@@ -188,6 +188,66 @@ def handle_receive_message(message):
 @app.route('/')
 def home():
     return render_template('index.html')
+
+
+@app.route('/covid/global/get-today-infected')
+def global_get_infect_today():
+    return jsonify(CovidAPI().get_infected_in_day_global()), 200
+
+
+@app.route('/covid/global/get-total-infected')
+def global_get_infect_total():
+    return jsonify(CovidAPI().get_total_infected_global()), 200
+
+
+@app.route('/covid/global/get-today-death')
+def global_get_death_today():
+    return jsonify(CovidAPI().get_death_in_day_global()), 200
+
+
+@app.route('/covid/global/get-total-death')
+def global_get_death_total():
+    return jsonify(CovidAPI().get_total_death_global()), 200
+
+
+@app.route('/covid/global/get-today-recovered')
+def global_get_recovered_today():
+    return jsonify(CovidAPI().get_recover_in_day_global()), 200
+
+
+@app.route('/covid/global/get-total-recovered')
+def global_get_recovered_total():
+    return jsonify(CovidAPI().get_total_recover_global()), 200
+
+
+@app.route('/covid/vietnam/get-today-infected')
+def vn_get_infected_today():
+    return jsonify(CovidAPI().get_infected_in_day_vietnam()), 200
+
+
+@app.route('/covid/vietnam/get-total-infected')
+def vn_get_infected_total():
+    return jsonify(CovidAPI().get_total_infected_vietnam()), 200
+
+
+@app.route('/covid/vietnam/get-today-death')
+def vn_get_death_today():
+    return jsonify(CovidAPI().get_death_in_day_vietnam()), 200
+
+
+@app.route('/covid/vietnam/get-total-death')
+def vn_get_death_total():
+    return jsonify(CovidAPI().get_total_death_vietnam()), 200
+
+
+@app.route('/covid/vietnam/get-today-recovered')
+def vn_get_recovered_today():
+    return jsonify(CovidAPI().get_recover_in_day_vietnam()), 200
+
+
+@app.route('/covid/vietnam/get-total-recovered')
+def vn_get_recovered_total():
+    return jsonify(CovidAPI().get_total_recover_vietnam()), 200
 
 
 host = '192.168.90.110'
