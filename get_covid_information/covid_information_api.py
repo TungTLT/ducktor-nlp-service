@@ -134,7 +134,6 @@ class CovidAPI:
                                 self._infected_in_day_vietnam = country['NewConfirmed']
                         else:
                             raise ValueError
-                    raise ValueError
                 else:
                     raise ValueError
             except ValueError:
@@ -159,7 +158,6 @@ class CovidAPI:
                                 self._total_infected_vietnam = country['TotalConfirmed']
                         else:
                             raise ValueError
-                    raise ValueError
                 else:
                     raise ValueError
             except ValueError:
@@ -184,7 +182,6 @@ class CovidAPI:
                                 self._death_in_day_vietnam = country['NewDeaths']
                         else:
                             raise ValueError
-                    raise ValueError
                 else:
                     raise ValueError
             except ValueError:
@@ -209,7 +206,6 @@ class CovidAPI:
                                 self._total_death_vietnam = country['TotalDeaths']
                         else:
                             raise ValueError
-                    raise ValueError
                 else:
                     raise ValueError
             except ValueError:
@@ -234,7 +230,6 @@ class CovidAPI:
                                 self._recover_in_day_vietnam = country['NewRecovered']
                         else:
                             raise ValueError
-                    raise ValueError
                 else:
                     raise ValueError
             except ValueError:
@@ -259,7 +254,6 @@ class CovidAPI:
                                 self._total_recover_vietnam = country['TotalRecovered']
                         else:
                             raise ValueError
-                    raise ValueError
                 else:
                     raise ValueError
             except ValueError:
