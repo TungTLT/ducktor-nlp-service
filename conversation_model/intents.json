@@ -38,6 +38,12 @@
           "patterns": ["What is", "Can you tell me about", "Could you tell me about", "Do you have any idea about", "Do you know anything about", "I want to know about", "I wonder if you could tell me about", "Find information about", "Find information", "I want to know about", "Tell me about", "Do you know", "Let me know about", "Provide me some information about", "What the heck is", "What about", "All about", "Something about", "Please tell me about", "I'm suffering from", "I am suffering from", "I'm sick with", "I'm having disease"],
           "responses": ["Navigating to disease information module"],
           "context": []
+        },
+        {
+          "tag": "ask_for_covid_information",
+          "patterns": ["Find about today covid infected cases in the world", "Find about today covid infected cases in Vietnam", "Find about today covid recovered cases in the world", "Find about today covid recovered cases in Vietnam", "Find about today covid death cases in the world", "Find about today covid death cases in the world", "Find about total covid infected cases in the world", "Find about covid infected cases in Vietnam", "Find about total covid death cases in the world", "Find about total covid death cases in Vietnam", "Find about total covid recovered cases in the world", "Find about total covid recovered cases in Vietnam", "How many covid death cases in Vietnam today?", "How many covid death cases in Vietnam totally", "How many covid death cases in the world today?", "How many covid death cases in the world totally", "how many covid recovered cases in the world today?", "How many covid recovered cases in Vietnam today?", "How many covid recovered cases in Vietnam totally?", "How many covid recovered cases in the world totally", "How many new covid infected cases in Vietnam today?", "How many new covid infected cases in the world today?", "How many covid infected cases in Vietnam totally", "how many covid infected cases in the world totally?"],
+          "responses": ["You can tap this button to view information about COVID-19", "Get update with COVID-19 information here (tap the button)"],
+          "context": []
         }
    ]
 }
