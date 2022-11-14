@@ -1,0 +1,10 @@
+hospital
+health clinic
+poly clinic
+polyclinic
+dental clinic
+dentist
+pharmacy
+drugstore
+doctor
+health care facility

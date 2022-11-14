@@ -17,9 +17,6 @@ socketIO = SocketIO(app, cors_allowed_origins='*', async_mode='eventlet')
 @socketIO.on(socket_io_event.EVENT_CONNECT)
 def connect():
     print("A user connected!")
-    socketIO.send(SocketIOResponse(intents.GREETING,
-                                   'Yo, It\'s Ducktor here, what can I help you?',
-                                   '').as_dictionary())
 
 
 @socketIO.on(socket_io_event.EVENT_DISCONNECT)
@@ -292,7 +289,7 @@ def vn_get_recovered_total():
     return jsonify(result), 200
 
 
-host = '192.168.90.110'
+host = '192.168.1.85'
 port = 5004
 
 if __name__ == '__main__':
