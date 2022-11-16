@@ -6,7 +6,7 @@ from common import intents, socket_io_event
 from socket_io_response import SocketIOResponse
 from named_entity_recognition_model import nltk_ner as disease_info_model
 from get_disease_information.disease_information_client import GetDiseaseInformationClient
-from get_covid_information.covid_information_api import CovidAPI
+from get_covid_information.covid_information_client import CovidAPI
 
 app = Flask(__name__, template_folder='template')
 app.config['SECRET_KEY'] = 'secret!Tunglete'
