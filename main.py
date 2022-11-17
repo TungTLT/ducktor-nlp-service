@@ -87,6 +87,11 @@ def handle_disease_information(user_input):
                                            socket_io_event.EVENT_MESSAGE).as_dictionary())
             return
 
+        socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
+                                       f'I found these information about {response_list[0].name}',
+                                       '').as_dictionary())
+        socketIO.sleep(1)
+
         name_message = f'{disease_info.name.upper()}'
         socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
                                        name_message,
@@ -145,11 +150,6 @@ def handle_disease_information(user_input):
                                        f'Which disease do you want to know? (type 1 - {max_selection})',
                                        socket_io_event.EVENT_ASK_FOR_DISEASE_SELECTION).as_dictionary())
     elif response_len == 1:
-        socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
-                                       f'I found these information about {response_list[0].name}',
-                                       '').as_dictionary())
-        socketIO.sleep(1)
-
         disease_info = client.get_disease_information(response_list[0].url)
         handle_send_disease_info_message(disease_info)
 
