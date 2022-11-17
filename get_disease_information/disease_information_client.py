@@ -12,7 +12,7 @@ def map_to_disease_response(network_response):
 
 
 def check_app_config_if_call_java_service():
-    return True if AppConfig.currentConfig == ConfigType.CALL_JAVA_SERVICE else False
+    return True if AppConfig.service_config == ConfigType.CALL_JAVA_SERVICE else False
 
 
 search_third_party_api = 'https://api.nhs.uk/conditions/?category=%s'
