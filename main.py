@@ -10,7 +10,6 @@ from get_covid_information.covid_information_client import CovidAPI
 
 app = Flask(__name__, template_folder='template')
 app.config['SECRET_KEY'] = 'secret!Tunglete'
-
 socketIO = SocketIO(app, cors_allowed_origins='*', async_mode='eventlet')
 
 
