@@ -47,6 +47,3 @@ class HealthCareLocationClient:
             print('Key Error')
             return []
 
-
-HealthCareLocationClient(latitude=10.846208, longitude=106.6172416).search_nearby_healthcare_location('find nearst '
-                                                                                                      'hospital')
