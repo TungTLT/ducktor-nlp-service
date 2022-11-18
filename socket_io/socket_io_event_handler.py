@@ -201,4 +201,4 @@ def handle_receive_message(message):
     elif user_intent == intents.DISEASE_INFORMATION:
         handle_disease_information(message)
     elif user_intent == intents.HEALTHCARE_LOCATION:
-        handle_healthcare_location()
+        handle_healthcare_location(message)
