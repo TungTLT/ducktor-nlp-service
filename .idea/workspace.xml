@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b773ff70-8655-4fc1-afec-38a398841443" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/routers/get_covid_infomation_router.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/socket_io/socket_io_client.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/find_healthcare_location/healthcare_location.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get_disease_information/disease_information_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_disease_information/disease_information_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/intents.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/intents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/socket_io_event.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/socket_io_event.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/find_healthcare_location/healthcare_location_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/find_healthcare_location/healthcare_location_client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socket_io/socket_io_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/socket_io/socket_io_event_handler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,13 +33,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/UIT/HK7-2022-2023/ducktor_nlp_service/main.py"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/UIT/HK7-2022-2023/ducktor_nlp_service/main.py&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\UIT\HK7-2022-2023\ducktor_nlp_service\find_healthcare_location" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python">
       <module name="ducktor_nlp_service" />

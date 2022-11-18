@@ -14,7 +14,7 @@ def home():
 socketIO = SocketIO(app, cors_allowed_origins='*', async_mode='eventlet')
 
 # don't remove these lines
-import socket_io.socket_io_client
+import socket_io.socket_io_event_handler
 import routers.get_covid_infomation_router
 
 host = AppConfig.host

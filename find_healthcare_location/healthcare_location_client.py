@@ -1,4 +1,5 @@
 import requests
+from find_healthcare_location.healthcare_location import HealthCareLocation
 
 
 class HealthCareLocationClient:
@@ -10,7 +11,7 @@ class HealthCareLocationClient:
         self.lat = latitude
         self.lon = longitude
 
-    def get_category_set_from_user_input(self, user_input: str) -> [int]:
+    def _get_category_set_from_user_input(self, user_input: str) -> [int]:
         autocomplete_url = self.autocomplete_base_url % {'query_parameter': user_input, 'key': self.api_key}
         category_sets = []
         try:
@@ -31,19 +32,25 @@ class HealthCareLocationClient:
             return []
 
     def search_nearby_healthcare_location(self, input: str):
-        category_sets = self.get_category_set_from_user_input(input)
+        category_sets = self._get_category_set_from_user_input(input)
         cate_list_str = ','.join([str(i) for i in category_sets])
         nearby_search_url = self.nearby_search_base_url % {'key': self.api_key,
                                                            'lat': self.lat,
                                                            'lon': self.lon,
                                                            'categorySets': cate_list_str}
         try:
-            # response = requests.get(nearby_search_url).json()
-            print(nearby_search_url)
+            response = requests.get(nearby_search_url).json()
+            results = response['results']
+            healthcare_locations = []
+            for result in results:
+                location = HealthCareLocation.from_map(result)
+                if location is not None:
+                    healthcare_locations.append(location)
+
+            return healthcare_locations
         except requests.exceptions.JSONDecodeError:
             print('Json Decode Error')
             return []
         except KeyError:
             print('Key Error')
             return []
-

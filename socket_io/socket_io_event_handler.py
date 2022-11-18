@@ -5,6 +5,7 @@ from socket_io_response import SocketIOResponse
 from named_entity_recognition_model import nltk_ner as disease_info_model
 from get_disease_information.disease_information_client import GetDiseaseInformationClient
 from __main__ import socketIO
+from find_healthcare_location.healthcare_location_client import HealthCareLocationClient
 
 
 @socketIO.on(socket_io_event.EVENT_CONNECT)
@@ -167,6 +168,26 @@ def handle_disease_information(user_input):
                                            socket_io_event.EVENT_ASK_FOR_DISEASE_SELECTION).as_dictionary())
 
 
+def handle_healthcare_location(user_input: str):
+    socketIO.send(SocketIOResponse(intents.HEALTHCARE_LOCATION,
+                                   'Can I have your location?',
+                                   socket_io_event.EVENT_RECEIVE_USER_LOCATION).as_dictionary())
+
+    @socketIO.on(socket_io_event.EVENT_RECEIVE_USER_LOCATION)
+    def handle_receive_user_location(user_location):
+        if isinstance(user_location, dict) and len(user_location) != 0:
+            lat = user_location['lat']
+            lon = user_location['lon']
+            healthcare_loc_client = HealthCareLocationClient(latitude=lat, longitude=lon)
+            healthcare_locations = healthcare_loc_client.search_nearby_healthcare_location(user_input)
+            # chờ xem frontend cần gì để mở map
+
+
+        else:
+            message = 'Sorry! I can find without your location.'
+            socketIO.send(intents.OPTIONS, message, socket_io_event.EVENT_MESSAGE)
+
+
 @socketIO.on(socket_io_event.EVENT_MESSAGE)
 def handle_receive_message(message):
     print(f"Receive: {message}")
@@ -179,3 +200,5 @@ def handle_receive_message(message):
         handle_disease_prediction()
     elif user_intent == intents.DISEASE_INFORMATION:
         handle_disease_information(message)
+    elif user_intent == intents.HEALTHCARE_LOCATION:
+        handle_healthcare_location()
