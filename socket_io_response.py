@@ -1,5 +1,7 @@
 class SocketIOResponse:
-    def __init__(self, intent, content, next_event='', action_code='', suggest_messages= []):
+    def __init__(self, intent, content, next_event='', action_code='', suggest_messages=[]):
+        if suggest_messages is None:
+            suggest_messages = []
         self.intent = intent
         self.content = content
         self.next_event = next_event
