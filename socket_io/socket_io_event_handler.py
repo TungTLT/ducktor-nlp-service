@@ -6,13 +6,20 @@ from named_entity_recognition_model import nltk_ner as disease_info_model
 from get_disease_information.disease_information_client import GetDiseaseInformationClient
 from __main__ import socketIO
 from find_healthcare_location.healthcare_location_client import HealthCareLocationClient
-from find_healthcare_location.healthcare_location import Location
 import json
+from common.suggest_message_provider import SuggestMessageProvider
+
+
+sug_mes_provider = SuggestMessageProvider()
 
 
 @socketIO.on(socket_io_event.EVENT_CONNECT)
 def connect():
     print("A user connected!")
+    message = "Hello! It's Ducktor. How can I help you?"
+    suggest_messages = sug_mes_provider.get_conversation_messages()
+    socketIO.send(SocketIOResponse(intent=intents.GREETING, content=message, suggest_messages=suggest_messages))
+
 
 
 @socketIO.on(socket_io_event.EVENT_DISCONNECT)

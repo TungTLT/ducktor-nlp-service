@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b773ff70-8655-4fc1-afec-38a398841443" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/suggest_message_provider.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/suggest_message_provider.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/socket_io_response.py" beforeDir="false" afterPath="$PROJECT_DIR$/socket_io_response.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
