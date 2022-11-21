@@ -9,7 +9,6 @@ from find_healthcare_location.healthcare_location_client import HealthCareLocati
 import json
 from common.suggest_message_provider import SuggestMessageProvider
 
-
 sug_mes_provider = SuggestMessageProvider()
 
 
@@ -18,8 +17,8 @@ def connect():
     print("A user connected!")
     message = "Hello! It's Ducktor. How can I help you?"
     suggest_messages = sug_mes_provider.get_conversation_messages()
-    socketIO.send(SocketIOResponse(intent=intents.GREETING, content=message, suggest_messages=suggest_messages))
-
+    socketIO.send(SocketIOResponse(intent=intents.GREETING,
+                                   content=message, suggest_messages=suggest_messages).as_dictionary())
 
 
 @socketIO.on(socket_io_event.EVENT_DISCONNECT)
@@ -29,8 +28,9 @@ def disconnect():
 
 @socketIO.on(socket_io_event.EVENT_DISEASE_PREDICTION)
 def handle_disease_prediction():
+    suggest_messages = sug_mes_provider.get_predict_disease_enter_symptoms_messages()
     response = SocketIOResponse(intents.DISEASE_PREDICTION, 'What is your disease symptoms?',
-                                socket_io_event.EVENT_RECEIVE_SYMPTOMS)
+                                socket_io_event.EVENT_RECEIVE_SYMPTOMS, suggest_messages=suggest_messages)
     socketIO.send(response.as_dictionary())
 
     @socketIO.on(socket_io_event.EVENT_RECEIVE_SYMPTOMS)
@@ -62,16 +62,20 @@ def handle_disease_prediction():
             socketIO.sleep(1)
 
         # ask if continue to predict
+        suggest_messages = sug_mes_provider.get_predict_disease_continue_messages()
         socketIO.send(SocketIOResponse(intents.DISEASE_PREDICTION,
                                        'Do you want me to continue to predict your disease?',
-                                       socket_io_event.EVENT_ASK_FOR_CONTINUE_PREDICT).as_dictionary())
+                                       socket_io_event.EVENT_ASK_FOR_CONTINUE_PREDICT,
+                                       suggest_messages=suggest_messages).as_dictionary())
 
     @socketIO.on(socket_io_event.EVENT_ASK_FOR_CONTINUE_PREDICT)
     def ask_for_continue_predict(message: str):
         message = message.lower()
+        suggest_messages = sug_mes_provider.get_predict_disease_enter_symptoms_messages()
         if message == 'yes' or 'yes' in message or message == 'y':
             response = SocketIOResponse(intents.DISEASE_PREDICTION, 'What is your disease symptoms?',
-                                        socket_io_event.EVENT_RECEIVE_SYMPTOMS)
+                                        socket_io_event.EVENT_RECEIVE_SYMPTOMS,
+                                        suggest_messages=suggest_messages)
             socketIO.send(response.as_dictionary())
         elif message == 'no' or 'no' in message or message == 'n':
             response = SocketIOResponse(intents.OPTIONS, 'What can I help you next?',
