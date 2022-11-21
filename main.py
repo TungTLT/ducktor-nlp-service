@@ -11,7 +11,7 @@ def home():
     return render_template('index.html')
 
 
-socketIO = SocketIO(app, cors_allowed_origins='*', async_mode='eventlet')
+socketIO = SocketIO(app, cors_allowed_origins='*', async_mode='eventlet', logger=True, engineio_logger=True)
 
 # don't remove these lines
 import socket_io.socket_io_event_handler

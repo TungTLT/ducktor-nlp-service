@@ -6,6 +6,8 @@ from named_entity_recognition_model import nltk_ner as disease_info_model
 from get_disease_information.disease_information_client import GetDiseaseInformationClient
 from __main__ import socketIO
 from find_healthcare_location.healthcare_location_client import HealthCareLocationClient
+from find_healthcare_location.healthcare_location import Location
+import json
 
 
 @socketIO.on(socket_io_event.EVENT_CONNECT)
@@ -58,7 +60,8 @@ def handle_disease_prediction():
                                        socket_io_event.EVENT_ASK_FOR_CONTINUE_PREDICT).as_dictionary())
 
     @socketIO.on(socket_io_event.EVENT_ASK_FOR_CONTINUE_PREDICT)
-    def ask_for_continue_predict(message):
+    def ask_for_continue_predict(message: str):
+        message = message.lower()
         if message == 'yes' or 'yes' in message or message == 'y':
             response = SocketIOResponse(intents.DISEASE_PREDICTION, 'What is your disease symptoms?',
                                         socket_io_event.EVENT_RECEIVE_SYMPTOMS)
@@ -169,19 +172,20 @@ def handle_disease_information(user_input):
 
 
 def handle_healthcare_location(user_input: str):
+    message = 'Can I have your location'
     socketIO.send(SocketIOResponse(intents.HEALTHCARE_LOCATION,
-                                   'Can I have your location?',
-                                   socket_io_event.EVENT_RECEIVE_USER_LOCATION).as_dictionary())
+                                   message, socket_io_event.EVENT_ASK_FOR_USER_LOCATION).as_dictionary())
 
-    @socketIO.on(socket_io_event.EVENT_RECEIVE_USER_LOCATION)
-    def handle_receive_user_location(user_location):
+    @socketIO.on(socket_io_event.EVENT_ASK_FOR_USER_LOCATION)
+    def handle_receive_user_location_and_return_healthcare_locations(user_location: str):
+        user_location = json.loads(user_location)
         if isinstance(user_location, dict) and len(user_location) != 0:
             lat = user_location['lat']
             lon = user_location['lon']
             healthcare_loc_client = HealthCareLocationClient(latitude=lat, longitude=lon)
             healthcare_locations = healthcare_loc_client.search_nearby_healthcare_location(user_input)
             # chờ xem frontend cần gì để mở map
-
+            print(healthcare_locations)
 
         else:
             message = 'Sorry! I can find without your location.'

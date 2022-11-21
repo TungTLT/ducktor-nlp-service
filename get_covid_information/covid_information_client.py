@@ -18,6 +18,24 @@ class CovidAPI:
     _total_recover_vietnam = None
 
     # GLOBAL
+    def get_summary_global(self):
+        try:
+            response = requests.get(url=self.base_url).json()
+            return {
+                'infected_in_day': response['Global']['NewConfirmed'],
+                'infected_total': response['Global']['TotalConfirmed'],
+                'death_in_day': response['Global']['NewDeaths'],
+                'death_total': response['Global']['TotalDeaths'],
+                'recovered_in_day': response['Global']['NewRecovered'],
+                'recovered_total': response['Global']['TotalRecovered']
+            }
+        except requests.exceptions.JSONDecodeError:
+            print('Json Decode Error')
+            return None
+        except KeyError:
+            print('Key Error')
+            return None
+
     def get_infected_in_day_global(self):
         if self._infected_in_day_global is None:
             try:
@@ -121,6 +139,28 @@ class CovidAPI:
         return {'result': self._total_recover_global}
 
     # VIETNAM
+    def get_summary_vietnam(self):
+        try:
+            response = requests.get(url=self.base_url).json()
+            countries = response['Countries']
+            for country in countries:
+                if country['CountryCode'] == 'VN':
+                    return {
+                        'infected_in_day': country['NewConfirmed'],
+                        'infected_total': country['TotalConfirmed'],
+                        'death_in_day': country['NewDeaths'],
+                        'death_total': country['TotalDeaths'],
+                        'recovered_in_day': country['NewRecovered'],
+                        'recovered_total': country['TotalRecovered']
+                    }
+            return None
+        except requests.exceptions.JSONDecodeError:
+            print('Json Decode Error')
+            return None
+        except KeyError:
+            print('Key Error')
+            return None
+
     def get_infected_in_day_vietnam(self):
         if self._infected_in_day_vietnam is None:
             try:

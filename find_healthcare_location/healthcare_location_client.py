@@ -1,12 +1,15 @@
 import requests
 from find_healthcare_location.healthcare_location import HealthCareLocation
+from pathlib import Path
+
+folder_location = Path(__file__).absolute().parent
 
 
 class HealthCareLocationClient:
-    api_key = open('api_key.txt', 'r').read()
+    api_key = open(f'{folder_location}/api_key.txt', 'r').read()
     autocomplete_base_url = 'https://api.tomtom.com/search/2/autocomplete/%(query_parameter)s.json?key=%(key)s&language=en-US'
     nearby_search_base_url = 'https://api.tomtom.com/search/2/nearbySearch/.json?key=%(key)s&lat=%(lat)f&lon=%(lon)f&categorySet=%(categorySets)s'
-
+ 
     def __init__(self, latitude: float, longitude: float):
         self.lat = latitude
         self.lon = longitude
@@ -54,3 +57,5 @@ class HealthCareLocationClient:
         except KeyError:
             print('Key Error')
             return []
+
+# HealthCareLocationClient(latitude=1, longitude=1).search_nearby_healthcare_location('abcd')

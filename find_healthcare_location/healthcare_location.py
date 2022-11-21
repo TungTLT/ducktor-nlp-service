@@ -1,5 +1,5 @@
 class Location:
-    def __init__(self, lat: float, lon: float):
+    def __init__(self, lat: float = 0.0, lon: float = 0.0):
         self.lat = lat
         self.lon = lon
 

@@ -97,3 +97,19 @@ def vn_get_recovered_total():
     if result is None:
         abort(500)
     return jsonify(result), 200
+
+
+@app.route('/covid/global/get-summary')
+def global_get_summary():
+    result = CovidAPI().get_summary_global()
+    if result is None:
+        abort(500)
+    return jsonify(result), 200
+
+
+@app.route('/covid/vietnam/get-summary')
+def vietnam_get_summary():
+    result = CovidAPI().get_summary_vietnam()
+    if result is None:
+        abort(500)
+    return jsonify(result), 200
