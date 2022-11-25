@@ -202,6 +202,11 @@ def handle_healthcare_location(user_input: str):
             message = 'Sorry! I can find without your location.'
             socketIO.send(intents.OPTIONS, message, socket_io_event.EVENT_MESSAGE)
 
+def handle_covid_information():
+    socketIO.sleep(1)
+    message = 'You can tap this button to view information about COVID-19'
+    socketIO.send(SocketIOResponse(intents.COVID_INFORMATION,
+                                   message, socket_io_event.EVENT_MESSAGE, action_code="0001").as_dictionary())
 
 @socketIO.on(socket_io_event.EVENT_MESSAGE)
 def handle_receive_message(message):
@@ -217,3 +222,5 @@ def handle_receive_message(message):
         handle_disease_information(message)
     elif user_intent == intents.HEALTHCARE_LOCATION:
         handle_healthcare_location(message)
+    elif user_intent == intents.COVID_INFORMATION:
+        handle_covid_information()

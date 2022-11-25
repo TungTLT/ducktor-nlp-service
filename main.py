@@ -1,6 +1,9 @@
 from flask import Flask, render_template
 from config import AppConfig
 from flask_socketio import SocketIO
+import os
+java_path = "C:/Program Files/Java/jdk-19/bin/java.exe"
+os.environ['JAVAHOME'] = java_path
 
 app = Flask(__name__, template_folder='template')
 app.config['SECRET_KEY'] = 'secret!Tunglete'

@@ -8,5 +8,5 @@ class ConfigType(Enum):
 
 class AppConfig:
     service_config: ConfigType = ConfigType.NOT_CALL_JAVA_SERVICE
-    host = '192.168.1.85'
+    host = '192.168.100.16'
     port = 5004

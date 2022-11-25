@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b773ff70-8655-4fc1-afec-38a398841443" name="Changes" comment="">
+    <list default="true" id="b4d105cf-c699-4baf-9023-e9f56688d4a9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/flask_heroku_tuto.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/intents.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/intents.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conversation_model/intents.json" beforeDir="false" afterPath="$PROJECT_DIR$/conversation_model/intents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get_disease_information/disease_information_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_disease_information/disease_information_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/socket_io/socket_io_event_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/socket_io/socket_io_event_handler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,9 +55,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="D:\UIT\HK7-2022-2023\ducktor_nlp_service\venv\Scripts\python.exe" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
@@ -66,7 +73,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b773ff70-8655-4fc1-afec-38a398841443" name="Changes" comment="" />
+      <changelist id="b4d105cf-c699-4baf-9023-e9f56688d4a9" name="Changes" comment="" />
       <created>1668675704602</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />

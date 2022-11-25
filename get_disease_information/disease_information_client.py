@@ -27,7 +27,7 @@ class GetDiseaseInformationClient:
     }
 
     def search_for_disease_information(self, user_input):
-        url = search_java_service_api if check_app_config_if_call_java_service() else search_java_service_api
+        url = search_java_service_api if check_app_config_if_call_java_service() else search_third_party_api
         url = url % user_input
         response = requests.get(url=url, headers=self.headers).json()
         results = response['significantLink']
