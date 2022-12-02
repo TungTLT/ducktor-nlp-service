@@ -58,4 +58,4 @@ class HealthCareLocationClient:
             print('Key Error')
             return []
 
-# HealthCareLocationClient(latitude=1, longitude=1).search_nearby_healthcare_location('abcd')
+# print(str(HealthCareLocationClient(latitude=10.77134, longitude=106.629766).search_nearby_healthcare_location('near hospital')[0]))

@@ -1,3 +1,6 @@
+import json
+
+
 class Location:
     def __init__(self, lat: float = 0.0, lon: float = 0.0):
         self.lat = lat
@@ -18,6 +21,9 @@ class Address:
         self.district = district
         self.city = city
 
+    def __str__(self):
+        return f'{self.street_number} {self.street_name}, {self.district}, {self.city}'
+
     @staticmethod
     def from_map(response: dict):
         address = response['address']
@@ -34,6 +40,9 @@ class HealthCareLocation:
         self.address = address
         self.location = location
 
+    def __str__(self):
+        return f'{self.name}\n{str(self.address)}'
+
     @staticmethod
     def from_map(response: dict):
         try:
@@ -42,3 +51,10 @@ class HealthCareLocation:
             return HealthCareLocation(name=response['poi']['name'], address=address, location=location)
         except KeyError:
             return None
+
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__,
+                          sort_keys=True, indent=4)
+
+
+# print(json.dumps(HealthCareLocation('a', Address('65', 'a', 'd', 'b'), Location(1, 1)).toJSON()))

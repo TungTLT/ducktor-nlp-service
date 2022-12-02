@@ -8,4 +8,6 @@ EVENT_DISEASE_INFORMATION = 'disease_information'
 EVENT_ASK_FOR_DISEASE_SELECTION = 'ask_for_disease_selection'
 EVENT_ASK_FOR_HEALTHCARE_LOCATION = 'ask_for_healthcare_location'
 EVENT_ASK_FOR_USER_LOCATION = 'ask_for_user_location'
+EVENT_LOCATION_SENT = 'location_sent'
+EVENT_NO_LOCATION_SENT = 'no_location_sent'
 

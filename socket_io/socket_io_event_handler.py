@@ -183,30 +183,49 @@ def handle_disease_information(user_input):
 
 
 def handle_healthcare_location(user_input: str):
-    message = 'Can I have your location'
+    message = 'Please! Wait for a few seconds!'
     socketIO.send(SocketIOResponse(intents.HEALTHCARE_LOCATION,
-                                   message, socket_io_event.EVENT_ASK_FOR_USER_LOCATION).as_dictionary())
+                                   message,
+                                   socket_io_event.EVENT_ASK_FOR_USER_LOCATION,
+                                   action_code='0002').as_dictionary())
 
-    @socketIO.on(socket_io_event.EVENT_ASK_FOR_USER_LOCATION)
-    def handle_receive_user_location_and_return_healthcare_locations(user_location: str):
-        user_location = json.loads(user_location)
+    @socketIO.on(socket_io_event.EVENT_LOCATION_SENT)
+    def handle_location_sent(user_location: str):
         if isinstance(user_location, dict) and len(user_location) != 0:
             lat = user_location['lat']
             lon = user_location['lon']
             healthcare_loc_client = HealthCareLocationClient(latitude=lat, longitude=lon)
             healthcare_locations = healthcare_loc_client.search_nearby_healthcare_location(user_input)
-            # chờ xem frontend cần gì để mở map
-            print(healthcare_locations)
+
+            socketIO.send(SocketIOResponse(intents.HEALTHCARE_LOCATION,
+                                           'Here are the top 5 nearest locations!').as_dictionary())
+
+            count = 0
+            for location in healthcare_locations:
+                count += 1
+                socketIO.send(SocketIOResponse(intents.HEALTHCARE_LOCATION,
+                                               str(location),
+                                               socket_io_event.EVENT_MESSAGE,
+                                               action_code='0003', extra_data=json.dumps(location.toJSON())).as_dictionary())
+                socketIO.sleep(1)
+                if count == 5:
+                    break
 
         else:
             message = 'Sorry! I can find without your location.'
             socketIO.send(intents.OPTIONS, message, socket_io_event.EVENT_MESSAGE)
+
+    @socketIO.on(socket_io_event.EVENT_NO_LOCATION_SENT)
+    def handle_no_location_sent():
+        print('no location sent')
+
 
 def handle_covid_information():
     socketIO.sleep(1)
     message = 'You can tap this button to view information about COVID-19'
     socketIO.send(SocketIOResponse(intents.COVID_INFORMATION,
                                    message, socket_io_event.EVENT_MESSAGE, action_code="0001").as_dictionary())
+
 
 @socketIO.on(socket_io_event.EVENT_MESSAGE)
 def handle_receive_message(message):
