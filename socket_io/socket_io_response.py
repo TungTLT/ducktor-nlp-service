@@ -1,9 +1,8 @@
 class SocketIOResponse:
-    def __init__(self, intent, content, next_event='', action_code='', suggest_messages=None, extra_data=None):
+    def __init__(self, content, next_event='', action_code='', suggest_messages=None, extra_data=None):
         if suggest_messages is None:
             suggest_messages = []
 
-        self.intent = intent
         self.content = content
         self.next_event = next_event
         self.action_code = action_code
@@ -12,7 +11,6 @@ class SocketIOResponse:
 
     def as_dictionary(self):
         return {
-            'intent': self.intent,
             'content': self.content,
             'next_event': self.next_event,
             'action_code': self.action_code,

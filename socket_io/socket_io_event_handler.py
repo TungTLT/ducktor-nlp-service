@@ -1,7 +1,9 @@
+from flask import request
+
 from conversation_model import chatbot as con_model
 from disease_prediction_model import chatbot_disease_prediction_v2 as disease_prediction_model
 from common import intents, socket_io_event
-from socket_io_response import SocketIOResponse
+from socket_io.socket_io_response import SocketIOResponse
 from named_entity_recognition_model import nltk_ner as disease_info_model
 from get_disease_information.disease_information_client import GetDiseaseInformationClient
 from __main__ import socketIO
@@ -10,15 +12,17 @@ import json
 from common.suggest_message_provider import SuggestMessageProvider
 
 sug_mes_provider = SuggestMessageProvider()
+userId = ''
 
 
 @socketIO.on(socket_io_event.EVENT_CONNECT)
 def connect():
+    global userId
     print("A user connected!")
+    userId = request.sid
     message = "Hello! It's Ducktor. How can I help you?"
     suggest_messages = sug_mes_provider.get_conversation_messages()
-    socketIO.send(SocketIOResponse(intent=intents.GREETING,
-                                   content=message, suggest_messages=suggest_messages).as_dictionary())
+    socketIO.send(SocketIOResponse(content=message, suggest_messages=suggest_messages).as_dictionary(), to=userId)
 
 
 @socketIO.on(socket_io_event.EVENT_DISCONNECT)
@@ -26,15 +30,16 @@ def disconnect():
     print("A user disconnected!")
 
 
-@socketIO.on(socket_io_event.EVENT_DISEASE_PREDICTION)
 def handle_disease_prediction():
+    global userId
     suggest_messages = sug_mes_provider.get_predict_disease_enter_symptoms_messages()
-    response = SocketIOResponse(intents.DISEASE_PREDICTION, 'What is your disease symptoms?',
+    response = SocketIOResponse('What is your disease symptoms?',
                                 socket_io_event.EVENT_RECEIVE_SYMPTOMS, suggest_messages=suggest_messages)
-    socketIO.send(response.as_dictionary())
+    socketIO.send(response.as_dictionary(), to=userId)
 
     @socketIO.on(socket_io_event.EVENT_RECEIVE_SYMPTOMS)
     def handle_receive_symptoms(symptoms):
+        global userId
         # predict disease
         predict_disease = disease_prediction_model.predict_disease(symptoms)
         if predict_disease == '':
@@ -42,105 +47,94 @@ def handle_disease_prediction():
         else:
             predict_message = f'You\'re maybe contracted to {predict_disease}'
 
-        predict_response = SocketIOResponse(intents.DISEASE_PREDICTION, predict_message, '')
-        socketIO.send(predict_response.as_dictionary())
+        predict_response = SocketIOResponse(predict_message)
+        socketIO.send(predict_response.as_dictionary(), to=userId)
         socketIO.sleep(1)
 
         # get information about that disease
         description = disease_prediction_model.get_disease_description(predict_disease)
         if description != '':
-            description_response = SocketIOResponse(intents.DISEASE_PREDICTION, description, '')
-            socketIO.send(description_response.as_dictionary())
+            description_response = SocketIOResponse(description)
+            socketIO.send(description_response.as_dictionary(), to=userId)
             socketIO.sleep(1)
 
         precaution = disease_prediction_model.get_disease_precaution(predict_disease)
         if precaution:
-            precaution_response = SocketIOResponse(intents.DISEASE_PREDICTION,
-                                                   f'You should {precaution[0]}, {precaution[1]}, {precaution[2]} and {precaution[3]}',
-                                                   '')
-            socketIO.send(precaution_response.as_dictionary())
+            precaution_response = SocketIOResponse(
+                f'You should {precaution[0]}, {precaution[1]}, {precaution[2]} and {precaution[3]}')
+            socketIO.send(precaution_response.as_dictionary(), to=userId)
             socketIO.sleep(1)
 
         # ask if continue to predict
         suggest_messages = sug_mes_provider.get_predict_disease_continue_messages()
-        socketIO.send(SocketIOResponse(intents.DISEASE_PREDICTION,
-                                       'Do you want me to continue to predict your disease?',
+        socketIO.send(SocketIOResponse('Do you want me to continue to predict your disease?',
                                        socket_io_event.EVENT_ASK_FOR_CONTINUE_PREDICT,
-                                       suggest_messages=suggest_messages).as_dictionary())
+                                       suggest_messages=suggest_messages).as_dictionary(), to=userId)
 
     @socketIO.on(socket_io_event.EVENT_ASK_FOR_CONTINUE_PREDICT)
     def ask_for_continue_predict(message: str):
+        global userId
         message = message.lower()
         suggest_messages = sug_mes_provider.get_predict_disease_enter_symptoms_messages()
         if message == 'yes' or 'yes' in message or message == 'y':
-            response = SocketIOResponse(intents.DISEASE_PREDICTION, 'What is your disease symptoms?',
+            response = SocketIOResponse('What is your disease symptoms?',
                                         socket_io_event.EVENT_RECEIVE_SYMPTOMS,
                                         suggest_messages=suggest_messages)
-            socketIO.send(response.as_dictionary())
+            socketIO.send(response.as_dictionary(), to=userId)
         elif message == 'no' or 'no' in message or message == 'n':
-            response = SocketIOResponse(intents.OPTIONS, 'What can I help you next?',
+            response = SocketIOResponse('What can I help you next?',
                                         socket_io_event.EVENT_MESSAGE)
-            socketIO.send(response.as_dictionary())
+            socketIO.send(response.as_dictionary(), to=userId)
         else:
-            response = SocketIOResponse(intents.DISEASE_PREDICTION, 'Please answer yes or no!',
+            response = SocketIOResponse('Please answer yes or no!',
                                         socket_io_event.EVENT_ASK_FOR_CONTINUE_PREDICT)
-            socketIO.send(response.as_dictionary())
+            socketIO.send(response.as_dictionary(), to=userId)
 
 
 @socketIO.on(socket_io_event.EVENT_DISEASE_INFORMATION)
 def handle_disease_information(user_input):
+    global userId
+
     def handle_send_disease_info_message(disease_info):
+        global userId
         if disease_info.is_not_valid():
-            socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
-                                           'Sorry! I found nothing about that disease!',
-                                           socket_io_event.EVENT_MESSAGE).as_dictionary())
+            socketIO.send(SocketIOResponse('Sorry! I found nothing about that disease!',
+                                           socket_io_event.EVENT_MESSAGE).as_dictionary(), to=userId)
             return
 
-        socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
-                                       f'I found these information about {response_list[0].name}',
-                                       '').as_dictionary())
+        socketIO.send(SocketIOResponse(f'I found these information about {response_list[0].name}').as_dictionary(),
+                      to=userId)
         socketIO.sleep(1)
 
         name_message = f'{disease_info.name.upper()}'
-        socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
-                                       name_message,
-                                       '').as_dictionary())
+        socketIO.send(SocketIOResponse(name_message).as_dictionary(), to=userId)
         socketIO.sleep(1)
 
         if disease_info.overview != '':
             overview_message = 'Overview: ' + disease_info.overview
-            socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
-                                           overview_message,
-                                           '').as_dictionary())
+            socketIO.send(SocketIOResponse(overview_message).as_dictionary(), to=userId)
             socketIO.sleep(1)
 
         if disease_info.diagnosis != '':
             diagnosis_message = 'Diagnosis: ' + disease_info.diagnosis
-            socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
-                                           diagnosis_message,
-                                           '').as_dictionary())
+            socketIO.send(SocketIOResponse(diagnosis_message).as_dictionary(), to=userId)
             socketIO.sleep(1)
 
         if disease_info.prevention != '':
             prevention_message = 'Prevention: ' + disease_info.prevention
-            socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
-                                           prevention_message,
-                                           '').as_dictionary())
+            socketIO.send(SocketIOResponse(prevention_message).as_dictionary(), to=userId)
             socketIO.sleep(1)
 
         if disease_info.treatment != '':
             treatment_message = 'Treatment: ' + disease_info.treatment
-            socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
-                                           treatment_message,
-                                           '').as_dictionary())
+            socketIO.send(SocketIOResponse(treatment_message).as_dictionary(), to=userId)
             socketIO.sleep(1)
 
-        socketIO.send(SocketIOResponse(intents.OPTIONS,
-                                       'That is all I know. What can I help you next?',
-                                       socket_io_event.EVENT_MESSAGE).as_dictionary())
+        socketIO.send(SocketIOResponse('That is all I know. What can I help you next?',
+                                       socket_io_event.EVENT_MESSAGE).as_dictionary(), to=userId)
 
     searching_disease = disease_info_model.get_disease_tagger_words(user_input)
-    socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION, 'Give me a second!', '').as_dictionary())
+    socketIO.send(SocketIOResponse('Give me a second!').as_dictionary(), to=userId)
     client = GetDiseaseInformationClient()
     response_list = client.search_for_disease_information(searching_disease)
     response_len = len(response_list)
@@ -149,22 +143,19 @@ def handle_disease_information(user_input):
     if response_len > 1:
         for index, disease in enumerate(response_list):
             if index < max_selection:
-                socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
-                                               f'{index + 1}: {disease.name}', '').as_dictionary())
+                socketIO.send(SocketIOResponse(f'{index + 1}: {disease.name}', '').as_dictionary(), to=userId)
                 socketIO.sleep(1)
             else:
                 break
 
-        socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
-                                       f'Which disease do you want to know? (type 1 - {max_selection})',
-                                       socket_io_event.EVENT_ASK_FOR_DISEASE_SELECTION).as_dictionary())
+        socketIO.send(SocketIOResponse(f'Which disease do you want to know? (type 1 - {max_selection})',
+                                       socket_io_event.EVENT_ASK_FOR_DISEASE_SELECTION).as_dictionary(), to=userId)
     elif response_len == 1:
         disease_info = client.get_disease_information(response_list[0].url)
         handle_send_disease_info_message(disease_info)
 
     else:
-        socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
-                                       'Sorry! I found nothing about that disease!',
+        socketIO.send(SocketIOResponse('Sorry! I found nothing about that disease!',
                                        socket_io_event.EVENT_MESSAGE).as_dictionary())
 
     @socketIO.on(socket_io_event.EVENT_ASK_FOR_DISEASE_SELECTION)
@@ -177,43 +168,44 @@ def handle_disease_information(user_input):
             else:
                 raise ValueError
         except ValueError:
-            socketIO.send(SocketIOResponse(intents.DISEASE_INFORMATION,
-                                           f'Please type 1 - {max_selection}',
-                                           socket_io_event.EVENT_ASK_FOR_DISEASE_SELECTION).as_dictionary())
+            socketIO.send(SocketIOResponse(f'Please type 1 - {max_selection}',
+                                           socket_io_event.EVENT_ASK_FOR_DISEASE_SELECTION).as_dictionary(), to=userId)
 
 
 def handle_healthcare_location(user_input: str):
+    global userId
     message = 'Please! Wait for a few seconds!'
-    socketIO.send(SocketIOResponse(intents.HEALTHCARE_LOCATION,
-                                   message,
+    socketIO.send(SocketIOResponse(message,
                                    socket_io_event.EVENT_ASK_FOR_USER_LOCATION,
-                                   action_code='0002').as_dictionary())
+                                   action_code='0002').as_dictionary(), to=userId)
 
     @socketIO.on(socket_io_event.EVENT_LOCATION_SENT)
     def handle_location_sent(user_location: str):
+        global userId
         if isinstance(user_location, dict) and len(user_location) != 0:
             lat = user_location['lat']
             lon = user_location['lon']
             healthcare_loc_client = HealthCareLocationClient(latitude=lat, longitude=lon)
             healthcare_locations = healthcare_loc_client.search_nearby_healthcare_location(user_input)
 
-            socketIO.send(SocketIOResponse(intents.HEALTHCARE_LOCATION,
-                                           'Here are the top 5 nearest locations!').as_dictionary())
+            socketIO.send(SocketIOResponse('Here are the top 5 nearest locations!').as_dictionary(), to=userId)
 
             count = 0
             for location in healthcare_locations:
                 count += 1
-                socketIO.send(SocketIOResponse(intents.HEALTHCARE_LOCATION,
-                                               str(location),
-                                               socket_io_event.EVENT_MESSAGE,
-                                               action_code='0003', extra_data=json.dumps(location.toJSON())).as_dictionary())
+                response = SocketIOResponse(str(location),
+                                            socket_io_event.EVENT_MESSAGE,
+                                            action_code='0003',
+                                            extra_data=json.dumps(location.toJSON())).as_dictionary()
+                socketIO.send(response, to=userId)
                 socketIO.sleep(1)
                 if count == 5:
                     break
 
         else:
             message = 'Sorry! I can find without your location.'
-            socketIO.send(intents.OPTIONS, message, socket_io_event.EVENT_MESSAGE)
+            response = SocketIOResponse(message, next_event=socket_io_event.EVENT_MESSAGE)
+            socketIO.send(response.as_dictionary(), to=userId)
 
     @socketIO.on(socket_io_event.EVENT_NO_LOCATION_SENT)
     def handle_no_location_sent():
@@ -221,17 +213,19 @@ def handle_healthcare_location(user_input: str):
 
 
 def handle_covid_information():
+    global userId
     socketIO.sleep(1)
     message = 'You can tap this button to view information about COVID-19'
-    socketIO.send(SocketIOResponse(intents.COVID_INFORMATION,
-                                   message, socket_io_event.EVENT_MESSAGE, action_code="0001").as_dictionary())
+    socketIO.send(SocketIOResponse(message,
+                                   socket_io_event.EVENT_MESSAGE,
+                                   action_code="0001").as_dictionary(), to=userId)
 
 
 @socketIO.on(socket_io_event.EVENT_MESSAGE)
 def handle_receive_message(message):
     print(f"Receive: {message}")
     result = con_model.response(message)
-    response = SocketIOResponse(result['intent'], result['content'], '')
+    response = SocketIOResponse(result['content'])
     socketIO.send(response.as_dictionary())
 
     user_intent = result['intent']
