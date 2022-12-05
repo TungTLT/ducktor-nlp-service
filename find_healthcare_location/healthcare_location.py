@@ -41,7 +41,8 @@ class HealthCareLocation:
         self.location = location
 
     def __str__(self):
-        return f'{self.name}\n{str(self.address)}'
+        address_value = str(self.address) if self.address is not None else '(Not found address)'
+        return f'{self.name}\n{address_value}'
 
     @staticmethod
     def from_map(response: dict):
@@ -52,7 +53,7 @@ class HealthCareLocation:
         except KeyError:
             return None
 
-    def toJSON(self):
+    def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__,
                           sort_keys=True, indent=4)
 

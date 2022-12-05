@@ -8,7 +8,10 @@
         "I want to predict disease",
         "Are you a bot?",
         "I want to know about ",
-        "Find information about "
+        "Find information about ",
+        "Find nearby ",
+        "How many infected cases",
+        "How many recover cases"
       ]
     },
     "predict_disease": {

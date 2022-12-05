@@ -31,12 +31,12 @@
         },
         {"tag": "disease_prediction",
          "patterns": ["Can you help me predict my disease?", "I need disease prediction", "I need disease prediction", "Can you tell me my disease?", "Do you know my disease?", "Can you help me with my disease?"],
-         "responses": ["Navigating to disease prediction module"],
+         "responses": ["Ok! Let me see"],
          "context": [""]
         },
         {"tag": "ask_for_disease_information",
           "patterns": ["What is", "Can you tell me about", "Could you tell me about", "Do you have any idea about", "Do you know anything about", "I want to know about", "I wonder if you could tell me about", "Find information about", "Find information", "I want to know about", "Tell me about", "Do you know", "Let me know about", "Provide me some information about", "What the heck is", "What about", "All about", "Something about", "Please tell me about", "I'm suffering from", "I am suffering from", "I'm sick with", "I'm having disease"],
-          "responses": ["Navigating to disease information module"],
+          "responses": ["Ok! Let me see"],
           "context": []
         },
         {

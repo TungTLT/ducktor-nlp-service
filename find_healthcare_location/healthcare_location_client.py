@@ -8,7 +8,7 @@ folder_location = Path(__file__).absolute().parent
 class HealthCareLocationClient:
     api_key = open(f'{folder_location}/api_key.txt', 'r').read()
     autocomplete_base_url = 'https://api.tomtom.com/search/2/autocomplete/%(query_parameter)s.json?key=%(key)s&language=en-US'
-    nearby_search_base_url = 'https://api.tomtom.com/search/2/nearbySearch/.json?key=%(key)s&lat=%(lat)f&lon=%(lon)f&categorySet=%(categorySets)s'
+    nearby_search_base_url = 'https://api.tomtom.com/search/2/nearbySearch/.json?key=%(key)s&lat=%(lat)f&lon=%(lon)f&categorySet=%(categorySets)s&limit=%(limit)s'
  
     def __init__(self, latitude: float, longitude: float):
         self.lat = latitude
@@ -36,11 +36,15 @@ class HealthCareLocationClient:
 
     def search_nearby_healthcare_location(self, input: str):
         category_sets = self._get_category_set_from_user_input(input)
+        if len(category_sets) == 0:
+            return []
+
         cate_list_str = ','.join([str(i) for i in category_sets])
         nearby_search_url = self.nearby_search_base_url % {'key': self.api_key,
                                                            'lat': self.lat,
                                                            'lon': self.lon,
-                                                           'categorySets': cate_list_str}
+                                                           'categorySets': cate_list_str,
+                                                           'limit': 5}
         try:
             response = requests.get(nearby_search_url).json()
             results = response['results']
@@ -58,4 +62,4 @@ class HealthCareLocationClient:
             print('Key Error')
             return []
 
-# print(str(HealthCareLocationClient(latitude=10.77134, longitude=106.629766).search_nearby_healthcare_location('near hospital')[0]))
+# print(HealthCareLocationClient(latitude=10.77134, longitude=106.629766).search_nearby_healthcare_location('the nearest hospital')[0].toJSON())

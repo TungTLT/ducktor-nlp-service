@@ -12,20 +12,24 @@ class SuggestMessageProvider:
 
     def get_conversation_messages(self) -> list[str]:
         try:
-            return self.suggest_messages['conversation']['intents']
+            result = set()
+            while len(result) < 5:
+                result.add(random.choice(self.suggest_messages['conversation']['intents']))
+
+            return list(result)
         except KeyError:
             return []
 
     def get_predict_disease_enter_symptoms_messages(self) -> list[str]:
         try:
-            result = []
+            result = set()
             suggest_symptoms = self.suggest_messages['predict_disease']['enter_symptoms']
-            for i in range(0, self.picked_number):
-                result.append(random.choice(suggest_symptoms))
+            while len(result) < 5:
+                result.add(random.choice(suggest_symptoms))
 
-            return result
+            return list(result)
         except KeyError:
-            return[]
+            return []
 
     def get_predict_disease_continue_messages(self):
         try:
