@@ -2,6 +2,9 @@ from flask import Flask, render_template
 from config import AppConfig
 from flask_socketio import SocketIO
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 java_path = "C:/Program Files/Java/jdk-19/bin/java.exe"
 os.environ['JAVAHOME'] = java_path
 
@@ -20,8 +23,8 @@ socketIO = SocketIO(app, cors_allowed_origins='*', async_mode='eventlet', logger
 import socket_io.socket_io_event_handler
 import routers.get_covid_infomation_router
 
-host = AppConfig.host
-port = AppConfig.port
+host = os.getenv('HOST')
+port = os.getenv('PORT')
 
 if __name__ == '__main__':
     socketIO.run(app=app, debug=True, host=host, port=port)
