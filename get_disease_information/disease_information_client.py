@@ -4,6 +4,7 @@ from get_disease_information.disease_information import DiseaseInformation
 from get_disease_information.disease_response import DiseaseResponse
 from config import AppConfig, ConfigType
 from common.api_url import SEARCH_DISEASE_INFO_API
+import os
 
 folder_location = Path(__file__).absolute().parent
 
@@ -22,7 +23,7 @@ detail_java_service_api = 'http://localhost:8080/ducktor/details?url=%s'
 
 
 class GetDiseaseInformationClient:
-    api_key = open(f'{folder_location}/api_key.txt', 'r').read()
+    api_key = os.getenv('DISEASE_INFO_API_KEY')
     headers = {
         'subscription-key': api_key
     }
