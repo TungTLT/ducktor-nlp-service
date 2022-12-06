@@ -1,9 +1,9 @@
 import requests
-import os
+from common.api_url import COVID_API
 
 
 class CovidAPI:
-    base_url = os.getenv('COVID_API')
+    base_url = COVID_API
     _infected_in_day_global = None
     _total_infected_global = None
     _death_in_day_global = None

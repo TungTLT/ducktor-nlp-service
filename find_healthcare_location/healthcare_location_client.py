@@ -1,15 +1,15 @@
 import requests
 from find_healthcare_location.healthcare_location import HealthCareLocation
 from pathlib import Path
-import os
+from common.api_url import AUTO_COMPLETE_API, NEARBY_SEARCH_API
 
 folder_location = Path(__file__).absolute().parent
 
 
 class HealthCareLocationClient:
     api_key = open(f'{folder_location}/api_key.txt', 'r').read()
-    autocomplete_base_url = os.getenv('AUTO_COMPLETE_API')
-    nearby_search_base_url = os.getenv('NEARBY_SEARCH_API')
+    autocomplete_base_url = AUTO_COMPLETE_API
+    nearby_search_base_url = NEARBY_SEARCH_API
  
     def __init__(self, latitude: float, longitude: float):
         self.lat = latitude

@@ -3,7 +3,7 @@ from pathlib import Path
 from get_disease_information.disease_information import DiseaseInformation
 from get_disease_information.disease_response import DiseaseResponse
 from config import AppConfig, ConfigType
-import os
+from common.api_url import SEARCH_DISEASE_INFO_API
 
 folder_location = Path(__file__).absolute().parent
 
@@ -16,7 +16,7 @@ def check_app_config_if_call_java_service():
     return True if AppConfig.service_config == ConfigType.CALL_JAVA_SERVICE else False
 
 
-search_third_party_api = os.getenv('SEARCH_DISEASE_INFO_API')
+search_third_party_api = SEARCH_DISEASE_INFO_API
 search_java_service_api = 'http://localhost:8080/ducktor/search?category=%s'
 detail_java_service_api = 'http://localhost:8080/ducktor/details?url=%s'
 
