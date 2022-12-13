@@ -23,8 +23,8 @@ socketIO = SocketIO(app, cors_allowed_origins='*', async_mode='eventlet', logger
 import socket_io.socket_io_event_handler
 import routers.get_covid_infomation_router
 
-# host = os.getenv('HOST')
-# port = os.getenv('PORT')
+host = os.getenv('HOST')
+port = os.getenv('PORT')
 
 if __name__ == '__main__':
-    socketIO.run(app=app, debug=False)
+    socketIO.run(app=app, host=host, port=port, debug=True)
