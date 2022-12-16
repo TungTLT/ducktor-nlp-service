@@ -67,9 +67,26 @@ def handle_disease_prediction():
         precaution = disease_prediction_model.get_disease_precaution(predict_disease)
 
         if predict_disease == '':
+            send_in_progress_messages(True)
+
             predict_message = 'Sorry, I can\'t figure out your disease!'
-        else:
-            predict_message = f'You\'re maybe contracted to {predict_disease}'
+            predict_response = SocketIOResponse(predict_message)
+            socketIO.send(predict_response.as_dictionary(), to=userId)
+            socketIO.sleep(1)
+
+            voice_content = f'{predict_message}'
+            send_content_for_voice(voice_content)
+
+            send_in_progress_messages(False)
+            continue_message = 'Do you want me to continue to predict your disease?'
+            send_content_for_voice(continue_message)
+            suggest_messages = sug_mes_provider.get_predict_disease_continue_messages()
+            socketIO.send(SocketIOResponse(continue_message,
+                                           socket_io_event.EVENT_ASK_FOR_CONTINUE_PREDICT,
+                                           suggest_messages=suggest_messages).as_dictionary(), to=userId)
+            return
+
+        predict_message = f'You\'re maybe contracted to {predict_disease}'
         precaution_message = f'You should {precaution[0]}, {precaution[1]}, {precaution[2]} and {precaution[3]}'
         continue_message = 'Do you want me to continue to predict your disease?'
 
