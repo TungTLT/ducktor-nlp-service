@@ -327,6 +327,17 @@ def handle_covid_information():
                                    suggest_messages=sug_mes).as_dictionary(), to=userId)
 
 
+def handle_reminder():
+    global userId
+    send_in_progress_messages(True)
+    send_in_progress_messages(False)
+    message = 'Give me more information!'
+    send_content_for_voice(message)
+    sug_mes = sug_mes_provider.get_conversation_messages()
+    socketIO.send(SocketIOResponse(message, socket_io_event.EVENT_MESSAGE,
+                                   suggest_messages=sug_mes).as_dictionary(), to=userId)
+
+
 @socketIO.on(socket_io_event.EVENT_MESSAGE)
 def handle_receive_message(message):
     print(f"Receive: {message}")
@@ -348,3 +359,5 @@ def handle_receive_message(message):
         handle_healthcare_location(message)
     elif user_intent == intents.COVID_INFORMATION:
         handle_covid_information()
+    elif user_intent == intents.REMINDER:
+        handle_reminder()
