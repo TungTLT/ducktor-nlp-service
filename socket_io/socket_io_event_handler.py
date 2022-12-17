@@ -352,6 +352,7 @@ def handle_reminder():
     send_content_for_voice(message)
     sug_mes = sug_mes_provider.get_conversation_messages()
     socketIO.send(SocketIOResponse(message, socket_io_event.EVENT_MESSAGE,
+                                   action_code="0005",
                                    suggest_messages=sug_mes).as_dictionary(), to=userId)
 
 
