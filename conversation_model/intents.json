@@ -26,7 +26,7 @@
         },
         {"tag": "options",
          "patterns": ["How you could help me?", "What you can do?", "What help you provide?", "How you can be helpful?", "What support is offered", "Need help please!", "Need help", "I need some info", "Will you help me?", "What else can you do?", "What do you do?", "What can you help me with?", "What can you do?", "What are you good at?", "Need help plz", "How can you help me", "Can you help me?", "How can you assist?", "How can you help me?", "How do you help?", "How to help you?", "How will you assist me?", "i need help", "Can you tell some info", "Help me please!"],
-         "responses": ["I can predict your disease.", "I can help you predict your disease."],
+         "responses": ["I can predict your disease.", "I can find any healthcare location.", "I can show you about COVID information.", "I can tell you about disease information.", "I can remind you to take medicine."],
          "context": [""]
         },
         {"tag": "disease_prediction",
