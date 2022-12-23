@@ -16,14 +16,16 @@ userId = ''
 
 
 def send_in_progress_messages(value):
+    global userId
     if not value:
         socketIO.sleep(1)
 
-    socketIO.emit('in_progress', value)
+    socketIO.emit('in_progress', value, to=userId)
 
 
 def send_content_for_voice(content):
-    socketIO.emit('content_for_voice', content)
+    global userId
+    socketIO.emit('content_for_voice', content, to=userId)
     socketIO.sleep(1)
 
 
