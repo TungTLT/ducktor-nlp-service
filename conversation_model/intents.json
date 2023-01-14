@@ -56,6 +56,12 @@
           "patterns": ["I want to make a reminder", "Can you remind me?", "Make me a reminder about", "Help me with a reminder"],
           "responses": ["Oke. Give me a second!"],
           "context": []
+        },
+        {
+          "tag": "news",
+          "patterns": ["Show me some news", "Any news?", "Give me today news"],
+          "responses": ["Oke. Give me a second!"],
+          "context": []
         }
    ]
 }
