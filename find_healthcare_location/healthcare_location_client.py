@@ -1,17 +1,22 @@
 import requests
 from find_healthcare_location.healthcare_location import HealthCareLocation
 from pathlib import Path
-from common.api_url import AUTO_COMPLETE_API, NEARBY_SEARCH_API
+from common.api_url import AUTO_COMPLETE_API, NEARBY_SEARCH_API, NEARBY_SEARCH_JAVA_API
 import os
+from config import AppConfig, ConfigType
 
 folder_location = Path(__file__).absolute().parent
+
+
+def check_app_config_if_call_java_service():
+    return True if AppConfig.service_config == ConfigType.CALL_JAVA_SERVICE else False
 
 
 class HealthCareLocationClient:
     api_key = os.getenv('HEALTHCARE_LOC_API_KEY')
     autocomplete_base_url = AUTO_COMPLETE_API
-    nearby_search_base_url = NEARBY_SEARCH_API
- 
+    nearby_search_base_url = NEARBY_SEARCH_API if not check_app_config_if_call_java_service() else NEARBY_SEARCH_JAVA_API
+
     def __init__(self, latitude: float, longitude: float):
         self.lat = latitude
         self.lon = longitude
@@ -36,7 +41,7 @@ class HealthCareLocationClient:
             print('Key error')
             return []
 
-    def search_nearby_healthcare_location(self, input: str):
+    def _search_nearby_healthcare_location_dver(self, input: str):
         category_sets = self._get_category_set_from_user_input(input)
         if len(category_sets) == 0:
             return []
@@ -64,4 +69,34 @@ class HealthCareLocationClient:
             print('Key Error')
             return []
 
-# print(HealthCareLocationClient(latitude=10.77134, longitude=106.629766).search_nearby_healthcare_location('the nearest hospital')[0].toJSON())
+    def _search_nearby_healthcare_location_jver(self, input: str):
+        try:
+            nearby_search_url = self.nearby_search_base_url % {'lat': self.lat,
+                                                               'lon': self.lon,
+                                                               'input': input}
+
+            healthcare_locations = []
+            response = requests.get(nearby_search_url).json()
+            for result in response:
+                location = HealthCareLocation.from_map_jver(result)
+                if location is not None:
+                    healthcare_locations.append(location)
+
+            return healthcare_locations
+        except requests.exceptions.JSONDecodeError:
+            print('Json Decode Error')
+            return []
+        except KeyError:
+            print('Key Error')
+            return []
+
+    def search_nearby_healthcare_location(self, input: str):
+        if check_app_config_if_call_java_service():
+            return self._search_nearby_healthcare_location_jver(input)
+        else:
+            return self._search_nearby_healthcare_location_dver(input)
+
+# list = HealthCareLocationClient(latitude=10.77134, longitude=106.629766).search_nearby_healthcare_location('find nearest hospital')
+#
+# for e in list:
+#     print(e.to_json())

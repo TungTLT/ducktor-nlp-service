@@ -2,3 +2,7 @@ AUTO_COMPLETE_API = 'https://api.tomtom.com/search/2/autocomplete/%(query_parame
 NEARBY_SEARCH_API = 'https://api.tomtom.com/search/2/nearbySearch/.json?key=%(key)s&lat=%(lat)f&lon=%(lon)f&categorySet=%(categorySets)s&limit=%(limit)s'
 COVID_API = 'https://api.covid19api.com/summary'
 SEARCH_DISEASE_INFO_API = 'https://api.nhs.uk/conditions/?category=%s'
+JAVA_SERVICE_BASE_URL = 'https://ducktorbackend-1673595226148.azurewebsites.net'
+NEWS_JAVA_API = f'{JAVA_SERVICE_BASE_URL}/news'
+NEARBY_SEARCH_JAVA_API = f'{JAVA_SERVICE_BASE_URL}/ducktor/nearbyCenter?lat=%(lat)f&lon=%(lon)f&userInput=%(input)s'
+SEARCH_DISEASE_INFO_JAVA_API = ''

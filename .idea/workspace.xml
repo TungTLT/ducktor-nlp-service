@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b4d105cf-c699-4baf-9023-e9f56688d4a9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ducktor_nlp_service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ducktor_nlp_service.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conversation_model/intents.json" beforeDir="false" afterPath="$PROJECT_DIR$/conversation_model/intents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/api_url.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/api_url.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/find_healthcare_location/healthcare_location.py" beforeDir="false" afterPath="$PROJECT_DIR$/find_healthcare_location/healthcare_location.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/find_healthcare_location/healthcare_location_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/find_healthcare_location/healthcare_location_client.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
